@@ -1,39 +1,42 @@
-# Scala and the Actor Model
+## Scala and the Actor Model
 
-This is title
+MISO-4207
 
 ---
 
 ## Introduction
 
++++
+
 ### What is the actor model?
 
-In the actor/object model, everything is an actor/object.
+In the actor model, everything is an actor.
 
----
++++
 
 ### What is OOP?
 
-OOP is about message passing and isolation and protection of state. Objects and classes are implementations of those ideas. - Alan Kay (Smalltalk)
+_OOP is about message passing and isolation and protection of state. Objects and classes are implementations of those ideas._ 
+Alan Kay (Smalltalk)
 
----
++++
 
 ### What is the actor model?
 
-Imagine a world where objects are completely isolated (even on failure) and can only use messages for communicating.
+Imagine a world where objects are __completely isolated__ (even on failure) and can only use __messages__ for communicating.
 
----
++++
 
 ## The Actor Model
 
-- Actors perform work in response to messages in an asynchronous way.
-- Actors have no methods, they just know how to handle certain messages.
-- Actors do not share state.
-- Actor instances can start, stop and recover from failures by themselves. Other entities use references to each instance for communication.
+- Actors perform work in response to __messages__ in an __asynchronous__ way.
+- Actors have no methods, they just know how to __handle__ certain __messages__.
+- Actors do __not share state__.
+- Actor instances can __start__, __stop__ and __recover from failures__ by __themselves__.
 
----
++++
 
-## Actors exist in your favorite language
+## Actors in your favorite language
 
 - Scala, Java & Kotlin: Akka
 - Erlang & Elixir: OTP
@@ -41,4 +44,3 @@ Imagine a world where objects are completely isolated (even on failure) and can 
 - Go: Proto.Actor
 - C++: CAF
 
----
