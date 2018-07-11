@@ -35,16 +35,24 @@ _OOP is about message passing and isolation and protection of state. Objects and
 
 _Is better to let an actor crash and then decide what to do with the error_
 
-@ul
-- Sequential programming:
-    - There is a __single process__.
-    - If that process crash, the whole aplication crash.
-    - We try to __prevent errors__ (defensive programming).
++++
 
-- Concurrent programming:
-    - There are __several processes__.
-    - If one process crash, we can handle the error.
-    - We try to __recover from errors__ (corrective programming).    
+### Sequential programming
+
+@ul
+- There is a __single process__.
+- If that process crash, the whole aplication crash.
+- We try to __prevent errors__ (defensive programming).
+@ulend
+
++++
+
+### Concurrent programming
+
+@ul
+- There are __several processes__.
+- If one process crash, we can handle the error.
+- We try to __recover from errors__ (corrective programming).    
 @ulend
 
 +++
