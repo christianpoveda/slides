@@ -24,35 +24,9 @@ _OOP is about message passing and isolation and protection of state. Objects and
 
 @ul
 - Actors perform work in response to __messages__ in an __asynchronous__ way.
-- Actors have no methods, they just know how to __handle__ certain __messages__.
+- Actors can send __messages__ to other actors.
 - Actors do __not share state__ (no data races).
-- Actors can __start__, __stop__ and __recover from failures__ by __themselves__.
-@ulend
-
-+++
-
-### Let it crash
-
-_Is better to let an actor crash and then decide what to do with the error_
-
-+++
-
-### Sequential programming
-
-@ul
-- There is a __single process__.
-- If that process crash, the whole aplication crash.
-- We try to __prevent errors__ (defensive programming).
-@ulend
-
-+++
-
-### Concurrent programming
-
-@ul
-- There are __several processes__.
-- If one process crash, we can handle the error.
-- We try to __recover from errors__ (corrective programming).    
+- __Creating actors__ and __sending messages__ is __location independant__.
 @ulend
 
 +++
@@ -76,9 +50,9 @@ _Is better to let an actor crash and then decide what to do with the error_
 ### The Akka actor model
 
 @ul
-- Actor System: Create and locate actors.
+- Actor System: Creates and locates actors.
 - Actor Class: Describes the state and behavior of an Actor.
-- Actor Instance: Exist at runtime and receive messages.
+- Actor Instance: Exists at runtime and receive messages.
 - Message: Unit of communication between instances.
 @ulend
 
@@ -109,7 +83,26 @@ class Printer extends Actor {
 }
 ```
 @[6](Actor classes inherit from `akka.actor.Actor`)
-@[1-4](Companion object has the recipe and the messages)
+@[1-4](Companion object has the `Props` factory and the messages)
 @[9-12](the `receive` method handles messages)
 @[3](This message...)
 @[10](Is handled here)
+
++++
+
+```scala
+object HelloWorld extends App {
+  implicit val system: ActorSystem = ActorSystem("mySystem")
+
+  val printer: ActorRef = system.actorOf(Printer.props, "printerActor")
+
+  printer ! Printer.PrintMsg("Hello, world!")
+
+  system.terminate()
+}
+```
+@[2](Create an `ActorSystem`)
+@[8](Terminate the `ActorSystem`)
+@[4](Create an actor instance in the system)
+@[6](Sends a message using the `!` operator)
+
