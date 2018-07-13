@@ -92,17 +92,19 @@ class Printer extends Actor {
 
 ```scala
 object HelloWorld extends App {
-  implicit val system: ActorSystem = ActorSystem("mySystem")
+  implicit val system: ActorSystem =
+    ActorSystem("mySystem")
 
-  val printer: ActorRef = system.actorOf(Printer.props, "printerActor")
+  val printer: ActorRef = 
+   system.actorOf(Printer.props, "printerActor")
 
   printer ! Printer.PrintMsg("Hello, world!")
 
   system.terminate()
 }
 ```
-@[2](Create an `ActorSystem`)
-@[8](Terminate the `ActorSystem`)
-@[4](Create an actor instance in the system)
-@[6](Sends a message using the `!` operator)
+@[2-3](Create an `ActorSystem`)
+@[10](Terminate the `ActorSystem`)
+@[5-6](Create an actor instance in the system)
+@[8](Sends a message using the `!` operator)
 
