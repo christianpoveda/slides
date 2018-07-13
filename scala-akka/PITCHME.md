@@ -73,16 +73,43 @@ _Is better to let an actor crash and then decide what to do with the error_
 
 +++
 
-## The Akka actor model
+### The Akka actor model
 
 @ul
 - Actor System: Create and locate actors.
 - Actor Class: Describes the state and behavior of an Actor.
 - Actor Instance: Exist at runtime and receive messages.
 - Message: Unit of communication between instances.
-@endul
+@ulend
 
 +++
 
-## The Akka actor model
+### The Akka actor model
 ![Akka System](scala-akka/images/akka_system.png)
+
+---
+
+## Hello World
+
++++
+
+```scala
+object Printer {
+  def props: Props = Props(new Printer)
+  final case class PrintMsg(text: String)
+}
+
+class Printer extends Actor {
+  import Printer._
+
+  def receive = {
+    case PrintMsg(text) => println(text)
+    case _ => println("Unexpected message")
+  }
+}
+```
+@[6](Actor classes inherit from `akka.actor.Actor`)
+@[1-4](Companion object has the recipe and the messages)
+@[9-12](the `receive` method handles messages)
+@[3](This message...)
+@[10](Is handled here)
