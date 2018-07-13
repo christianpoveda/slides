@@ -87,8 +87,7 @@ class Printer extends Actor {
 @[6](Actor classes inherit from `akka.actor.Actor`)
 @[1-4](Companion object has the `props` factory and the messages)
 @[9-12](the `receive` method handles messages)
-@[3](This message...)
-@[10](Is handled here)
+@[3, 10](This message is handled here)
 @[1-13]
 
 +++
@@ -139,7 +138,7 @@ class Amnesiac(val printer: ActorRef) extends Actor {
 }
 ```
 @[8](The class has an `ActorRef` as argument)
-@[2](The `props` factory has the same argument)
+@[8, 2](The `props` factory has the same argument)
 @[11](The `last` attribute is mutable)
 @[4-5](This actor handles two kind of messages)
 @[1-13]
@@ -149,6 +148,7 @@ class Amnesiac(val printer: ActorRef) extends Actor {
 ### An stateful actor
 
 ```scala
+  ...
   def receive = {
     case LastMsg => last match {
       case Some(name) =>
@@ -162,9 +162,9 @@ class Amnesiac(val printer: ActorRef) extends Actor {
     }
   }
 ```
-@[8-11](Say Hello and store the name)
-@[2-7](Say the last name)
-@[1-12]
+@[9-12](Say Hello and store the name)
+@[3-8](Say the last name)
+@[1-13]
 
 +++
 
