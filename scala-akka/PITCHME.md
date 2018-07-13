@@ -201,12 +201,6 @@ system.terminate()
 
 +++
 
-### Now do it yourself
-
-Change the `Printer` actor so that it only prints after receiving 5 messages
-
-+++
-
 ### No data races
 
 ```scala
@@ -249,6 +243,12 @@ Change the `Printer` actor so that it only prints after receiving 5 messages
   scala.io.StdIn.readLine()
   system.terminate()
 ```
+
++++
+
+### Now do it yourself
+
+Change the `Printer` actor so that it only prints after receiving 5 messages
 
 ---
 
@@ -357,5 +357,5 @@ object Patterns extends App {
 ### Where to learn more
 - [The akka website](https://akka.io/)
 - [Learning Concurrent Programming in Scala](https://www.amazon.com/Learning-Concurrent-Programming-Aleksandar-Prokopec/dp/1783281413)
-- [Programming Concurrency on the JVM](https://pragprog.com/book/vspcon/programming-concurrency-on-the-jvm)
+- [Programming Erlang](https://pragprog.com/book/jaerlang2/programming-erlang)
 - [The Little Elixir & OTP Guidebook](https://www.manning.com/books/the-little-elixir-and-otp-guidebook)
