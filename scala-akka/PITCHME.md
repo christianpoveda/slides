@@ -194,13 +194,10 @@ system.terminate()
 
 Change the `Printer` actor so that it only prints after receiving 5 messages
 
----
-
-## No data races
-
 +++
 
-### The thready main app
+### No data races
+
 ```scala
   implicit val system = ActorSystem("mySystem")
 
@@ -239,4 +236,105 @@ Change the `Printer` actor so that it only prints after receiving 5 messages
   lastThread.start
 
   system.terminate()
+```
+
+---
+
+## Patterns
+
++++
+
+### A mnemonist actor
+
+```scala
+object Mnemonist {
+  def props: Props = Props(new Mnemonist)
+
+  final case class RememberMsg(name: String)
+  final case class RecallMsg()
+  final case class NamesMsg(names: List[String])
+}
+
+class Mnemonist() extends Actor {
+  import Mnemonist._
+
+  var names: List[String] = List.empty[String]
+
+  def receive = {
+    case RememberMsg(name) => names = name::names
+    case RecallMsg => sender ! NamesMsg(names)
+  }
+}
+```
+@[12](Stores all the received names)
+@[4, 15](Adds the name to `names`)
+@[5-6, 16](Sends back `names`)
+@[5-6, 16](`sender` is a reference to the sender)
+@[1-18]
+
++++
+
+### Fixing amnesia
+
+```scala
+object Amnesiac {
+  def props(printer: ActorRef, mnemonist: ActorRef) = 
+    Props(new Amnesiac(printer, mnemonist))
+  ...
+  final case class FirstMsg()
+}
+```
+@[2-3](Now we have a reference to `mnemonist`)
+@[5](We can use `mnemonist` to recall the first name)
+@[1-6]
+
++++
+
+### Fixing amnesia
+
+```scala
+class Amnesiac(val printer: ActorRef, val mnemonist: ActorRef) extends Actor {
+  ...
+  implicit val timeout = Timeout(30 seconds)
+
+  def receive = {
+    case FirstMsg => {
+      val future = (mnemonist ? Mnemonist.RecallMsg).mapTo[Mnemonist.NamesMsg] 
+      
+      future.map({ msg: Mnemonist.NamesMsg => msg.names.lastOption match {
+        case Some(name) => Printer.PrintMsg(s"The first person who talked to me was $name\n")
+        case None => Printer.PrintMsg(s"No one has talked to me :(\n")
+      }}).pipeTo(printer)
+    ...
+```
+@[1](Modify the class arguments accordingly)
+@[6-12](Handles the new message)
+@[7](`?` or `ask` allow us to receive something back)
+@[3, 7](It needs a timeout)
+@[7](The result is a `Future`)
+@[9-11](`map` let us transform a `Future`)
+@[12](`pipeTo` sends a `Future` to an actor)
+@[1-13]
+
++++
+
+### The main app
+
+```scala
+object Patterns extends App {
+  implicit val system: ActorSystem = ActorSystem("mySystem")
+
+  val printer: ActorRef = system.actorOf(Printer.props, "printerActor")
+  val mnemonist: ActorRef = system.actorOf(Mnemonist.props, "mnemonistActor")
+  val amnesiac: ActorRef = system.actorOf(Amnesiac.props(printer, mnemonist), "amnesiacActor")
+
+  amnesiac ! Amnesiac.HelloMsg("Alice")
+  amnesiac ! Amnesiac.HelloMsg("Bob")
+  amnesiac ! Amnesiac.HelloMsg("Charlie")
+  amnesiac ! Amnesiac.HelloMsg("David")
+  amnesiac ! Amnesiac.LastMsg
+  amnesiac ! Amnesiac.FirstMsg
+
+  system.terminate()
+}
 ```
