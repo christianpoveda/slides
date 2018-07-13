@@ -83,10 +83,11 @@ class Printer extends Actor {
 }
 ```
 @[6](Actor classes inherit from `akka.actor.Actor`)
-@[1-4](Companion object has the `Props` factory and the messages)
+@[1-4](Companion object has the `props` factory and the messages)
 @[9-12](the `receive` method handles messages)
 @[3](This message...)
 @[10](Is handled here)
+@[1-13]
 
 +++
 
@@ -107,4 +108,77 @@ object HelloWorld extends App {
 @[10](Terminate the `ActorSystem`)
 @[5-6](Create an actor instance in the system)
 @[8](Sends a message using the `!` operator)
+@[1-11]
 
+---
+
+## Messages between actors
+
++++
+
+### An stateful actor
+
+```scala
+object Amnesiac {
+  def props(printer: ActorRef): Props = Props(new Amnesiac(printer))
+  
+  final case class LastMsg()
+  final case class HelloMsg(name: String)
+}
+
+class Amnesiac(val printer: ActorRef) extends Actor {
+  import Amnesiac._
+
+  var last: Option[String] = None
+  ...
+}
+```
+@[8](The class has an `ActorRef` as argument)
+@[2](The `props` factory has the same argument)
+@[11](The `last` attribute is mutable)
+@[4-5](This actor handles two kind of messages)
+@[1-13]
+
++++
+
+### An stateful actor
+
+```scala
+  def receive = {
+    case LastMsg => last match {
+      case Some(name) =>
+        printer ! Printer.PrintMsg(s"The last person who talked to me was $name\n")
+      case None =>
+        printer ! Printer.PrintMsg(s"No one has talked to me :(\n")
+    }
+    case HelloMsg(name) => {
+      printer ! Printer.PrintMsg(s"Hello $name!")
+      last = Some(name);
+    }
+  }
+```
+@[8-11](Say Hello and store the name)
+@[2-7](Say the last name)
+@[1-12]
+
++++
+
+### The main app
+
+```scala
+implicit val system: ActorSystem = ActorSystem("mySystem")
+
+val printer = system.actorOf(Printer.props, "printerActor")
+val amnesiac = system.actorOf(Amnesiac.props(printer), "amnesiacActor")
+
+amnesiac ! Amnesiac.LastMsg
+amnesiac ! Amnesiac.HelloMsg("Alice")
+amnesiac ! Amnesiac.LastMsg
+amnesiac ! Amnesiac.HelloMsg("Bob")
+amnesiac ! Amnesiac.LastMsg
+
+system.terminate()
+```
+@[4](Create a new actor using the `props` factory)
+@[6-10](Have fun!)
+@[1-12]
