@@ -59,7 +59,16 @@ _OOP is about message passing and isolation and protection of state. Objects and
 +++
 
 ### The Akka actor model
+
 ![Akka System](scala-akka/images/akka_system.png)
+
++++
+
+### Real world usage
+ 
+@ul
+- Akka has its own http library [`akka-http`](https://doc.akka.io/docs/akka-http/current/) 
+- Akka has its own streaming library [`akka-stream`](https://doc.akka.io/docs/akka/current/stream/) 
 
 ---
 
@@ -103,16 +112,17 @@ object HelloWorld extends App {
    system.actorOf(Printer.props, "printerActor")
 
   printer ! Printer.PrintMsg("Hello, world!")
-
+  
+  scala.io.StdIn.readLine()
   system.terminate()
 }
 ```
 @[2-3](Create an `ActorSystem`)
-@[10](Terminate the `ActorSystem`)
+@[11](Terminate the `ActorSystem`)
 @[5-6](Create an actor instance in the system)
 @[8](Sends a message using the `!` operator)
 @[8](This is a non blocking operation)
-@[1-11]
+@[1-12]
 
 ---
 
@@ -182,11 +192,12 @@ amnesiac ! Amnesiac.LastMsg
 amnesiac ! Amnesiac.HelloMsg("Bob")
 amnesiac ! Amnesiac.LastMsg
 
+scala.io.StdIn.readLine()
 system.terminate()
 ```
 @[4](Create a new actor using the `props` factory)
 @[6-10](Have fun!)
-@[1-12](What should happen at runtime?)
+@[1-13](What should happen at runtime?)
 
 +++
 
@@ -235,6 +246,7 @@ Change the `Printer` actor so that it only prints after receiving 5 messages
   bobThread.start
   lastThread.start
 
+  scala.io.StdIn.readLine()
   system.terminate()
 ```
 
@@ -335,6 +347,15 @@ object Patterns extends App {
   amnesiac ! Amnesiac.LastMsg
   amnesiac ! Amnesiac.FirstMsg
 
+  scala.io.StdIn.readLine()
   system.terminate()
 }
 ```
+
+---
+
+### Where to learn more
+- [The akka website](https://akka.io/)
+- [Learning Concurrent Programming in Scala](https://www.amazon.com/Learning-Concurrent-Programming-Aleksandar-Prokopec/dp/1783281413)
+- [Programming Concurrency on the JVM](https://pragprog.com/book/vspcon/programming-concurrency-on-the-jvm)
+- [The Little Elixir & OTP Guidebook](https://www.manning.com/books/the-little-elixir-and-otp-guidebook)
