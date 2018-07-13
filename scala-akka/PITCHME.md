@@ -20,7 +20,7 @@ _OOP is about message passing and isolation and protection of state. Objects and
 
 +++
 
-### The Actor Model
+### The actor model
 
 @ul
 - Actors perform work in response to __messages__ in an __asynchronous__ way.
@@ -67,6 +67,8 @@ _OOP is about message passing and isolation and protection of state. Objects and
 
 +++
 
+### A printer actor
+
 ```scala
 object Printer {
   def props: Props = Props(new Printer)
@@ -91,6 +93,8 @@ class Printer extends Actor {
 
 +++
 
+### The main app
+
 ```scala
 object HelloWorld extends App {
   implicit val system: ActorSystem =
@@ -108,6 +112,7 @@ object HelloWorld extends App {
 @[10](Terminate the `ActorSystem`)
 @[5-6](Create an actor instance in the system)
 @[8](Sends a message using the `!` operator)
+@[8](This is a non blocking operation)
 @[1-11]
 
 ---
@@ -181,4 +186,57 @@ system.terminate()
 ```
 @[4](Create a new actor using the `props` factory)
 @[6-10](Have fun!)
-@[1-12]
+@[1-12](What should happen at runtime?)
+
++++
+
+### Now do it yourself
+
+Change the `Printer` actor so that it only prints after receiving 5 messages
+
+---
+
+## No data races
+
++++
+
+### The thready main app
+```scala
+  implicit val system = ActorSystem("mySystem")
+
+  val printer = system.actorOf(Printer.props, "printerActor")
+  val amnesiac = system.actorOf(Amnesiac.props(printer), "amnesiacActor")
+
+  val aliceThread = new Thread {
+    override def run = {
+      for(_ <- 1 to 10) {
+        amnesiac ! Amnesiac.HelloMsg("Alice")
+        Thread.sleep(100)
+      } 
+    }
+  }
+
+  val bobThread = new Thread {
+    override def run = {
+      for(_ <- 1 to 10) {
+        amnesiac ! Amnesiac.HelloMsg("Bob")
+        Thread.sleep(100)
+      } 
+    }
+  }
+
+  val lastThread = new Thread {
+    override def run = {
+      for(_ <- 1 to 10) {
+        amnesiac ! Amnesiac.LastMsg
+        Thread.sleep(100)
+      } 
+    }
+  }
+
+  aliceThread.start
+  bobThread.start
+  lastThread.start
+
+  system.terminate()
+```
