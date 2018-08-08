@@ -268,23 +268,4 @@ $$succ(zero)\ plus\ succ(succ(zero))$$
 :::
 
 
-# Lógica como sistema formal
 
-## Lógica como sistema formal
-
-. . .
-
-::: incremental
-
-- El alfabeto: 
-$$A = \{\lnot, \land, \lor, (, ), p, q, r, s, ...\}$$
-- La sintaxis:
-\begin{align*}
-    \PVerb{sentence} &\rightarrow \PVerb{atomic_sentence} \mid \PVerb{complex_sentence} \\
-    \PVerb{atomic_sentence} &\rightarrow \bm{True} \mid \bm{False} \mid \bm{p} \mid \bm{q} \mid \bm{r} \mid \bm{s} \mid ... \\
-    \PVerb{complex_sentence} &\rightarrow  \PVerb{unary_op}\ \PVerb{sentence} \\
-    \PVerb{complex_sentence} &\rightarrow  \bm{(} \PVerb{sentence}\ \PVerb{binary_op}\ \PVerb{sentence} \bm{)}\\
-    \PVerb{unary_op} &\rightarrow \bm{\lnot} \\
-    \PVerb{binary_op} &\rightarrow \bm{\land} \mid \bm{\lor} \\
-\end{align*}
-:::
