@@ -1,11 +1,5 @@
-
-## Matemática estructural y lógica
-
-ISIS-1104
-
----
-
 ## Sistemas formales
+ISIS-1104
 
 +++
 
@@ -51,7 +45,7 @@ A su vez un lenguaje formal esta constituido por:
 
 ### Ejemplo
 
-Los números decimales:
+Los números binarios:
 @ul
 - El alfabeto: `\(A = \{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, .\}\)`
 - La sintaxis: Una fbf es toda aquella que esté compuesta de dos sucesiones de números separadas por un punto.
@@ -74,3 +68,24 @@ Los números decimales:
 
 +++
 
+### Formas normales
+
+Una forma normal o BNF consta de:
+@ul
+- Un alfabeto `\(A\)` de símbolos __terminales__.
+- Un alfabeto `\(N\)` de símbolos __auxiliares__.
+- Un conjunto de __producciones__, reglas de la forma `\(\alpha \rightarrow \beta\)`.
+@ulend
++++
+
+### Ejemplo
+
+Forma normal para los números binarios:
+
+- símbolos terminales: `\(A = \{0, 1\}\)`
+- símbolos auxiliares: `\(N = \{d\}\)`
+- producciones: 
+    `$$ d \rightarrow 0 $$`
+    `$$ d \rightarrow 1 $$`
+    `$$ d \rightarrow 0d $$`
+    `$$ d \rightarrow 1d $$`
