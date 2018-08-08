@@ -36,8 +36,8 @@ Un sistema formal está constituido por dos partes:
 ### Lenguaje formal
 A su vez un lenguaje formal esta constituido por:
 @ul
-- Una colección de simbolos (alfabeto)
-- Una serie de reglas que nos indican como combinar simbolos (sintaxis) 
+- Una colección de simbolos, el __alfabeto__ (usualmente denotado por `\(A\)`).
+- Una serie de reglas que nos indican como combinar simbolos, la __sintaxis__.
 @ulend
 
 +++
@@ -50,9 +50,27 @@ A su vez un lenguaje formal esta constituido por:
 +++
 
 ### Ejemplo
-Los números decimales
+
+Los números decimales:
 @ul
-- El alfabeto: `\(A = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, .}\)`
-- La sintaxis: Una fbf es toda aquella que este compuesta de dos sucesiónes de números separadas por un punto.
+- El alfabeto: `\(A = \{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, .\}\)`
+- La sintaxis: Una fbf es toda aquella que esté compuesta de dos sucesiones de números separadas por un punto.
 @ulend
+
++++
+
+### Ejemplo
+
+@ul
+- Fórmulas bien formadas:
+    - `\(1.4142\)`
+    - `\(32.04\)`
+    - `\(1234.0\)`
+- Fórmulas inválidas:
+    - `\(12341\)`
+    - `\(132.432.23\)`
+    - `\(.123\)`
+@ulend
+
++++
 
