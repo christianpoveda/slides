@@ -52,7 +52,7 @@ A su vez un lenguaje formal esta constituido por:
 ### Ejemplo
 Los números decimales
 @ul
-- El alfabeto: $A = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, .}$
+- El alfabeto: `\(A = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, .}\)`
 - La sintaxis: Una fbf es toda aquella que este compuesta de dos sucesiónes de números separadas por un punto.
 @ulend
 
