@@ -66,7 +66,11 @@ $$\PVerb{digito} \rightarrow \bm{0} \mid \bm{1} \mid \bm{2} \mid \bm{3} \mid \bm
 
 ## Ejemplo: El lenguaje de los decimales
 
+. . . 
+
 ¿Es $1.46$ un decimal?
+
+. . . 
 
 \begin{tikzpicture}[sibling distance=10em,
   every node/.style = {shape=rectangle, rounded corners,
@@ -90,10 +94,14 @@ $$\PVerb{digito} \rightarrow \bm{0} \mid \bm{1} \mid \bm{2} \mid \bm{3} \mid \bm
 
 ## Ejemplo: El lenguaje de los decimales
 
+. . .
+
 Ahora ustedes ¿Es $32.5.1$ un decimal?
 \vspace*{165 pt}
 
 ## Ejemplo: El lenguaje de los decimales
+
+. . .
 
 ::: incremental
 
@@ -112,6 +120,8 @@ Ahora ustedes ¿Es $32.5.1$ un decimal?
 
 ## Definiciones
 
+. . .
+
 ::: incremental
 - Un lenguaje formal esta constituido por:
     - Una colección de _simbolos_, el __alfabeto__ (usualmente denotado por $A$).
@@ -123,6 +133,8 @@ Ahora ustedes ¿Es $32.5.1$ un decimal?
 # Semántica
 
 ## Ejemplo: Los números naturales
+
+. . .
 
 ::: incremental
 
@@ -139,6 +151,8 @@ $$\PVerb{natural} \rightarrow \bm{zero} \mid \bm{succ} \bm{(} \PVerb{natural} \b
 
 ## Ejemplo: Los números naturales
 
+. . . 
+
 ::: incremental
 
 - Sabemos que $zero$ representa al número $0$.
@@ -151,7 +165,12 @@ $$I(succ(\PVerb{natural})) = 1 + I(\PVerb{natural})$$
 :::
 
 ## Ejercicio: Los números binarios
+
+. . .
+
 Escriba una semántica para el siguiente lenguaje
+
+. . .
 
 - El alfabeto: 
 $$A = \{0, 1\}$$
@@ -162,12 +181,16 @@ $$A = \{0, 1\}$$
     \PVerb{digito} &\rightarrow \bm{0} \mid \bm{1} \\
 \end{align*}
 
+. . .
+
 Para que se pueda interpretar como números, es decir:
 $$I(110) = 6$$
 
 # Aparato deductivo
 
 ## Ejemplo: Los naturales con la suma
+
+. . . 
 
 ::: incremental
 
@@ -176,12 +199,18 @@ $$A = \{zero, succ, (, ), plus\}$$
 - La sintaxis: 
 \begin{align*}
     \PVerb{nat_sum} &\rightarrow \PVerb{natural} \\
-    \PVerb{nat_sum} &\rightarrow \PVerb{natural}\ \bm{plus}\ \PVerb{natural} \\
+    \PVerb{nat_sum} &\rightarrow \PVerb{natural}\ \bm{plus}\ \PVerb{nat_sum} \\
     \PVerb{natural} &\rightarrow \bm{zero} \mid \bm{succ} \bm{(} \PVerb{natural} \bm{)} \\
 \end{align*}
+- Algunas fórmulas bien formadas:
+    - $succ(succ(zero))$
+    - $succ(zero)\ plus\ zero$
+    - $zero\ plus\ succ(zero)\ plus\ succ(succ(zero))$
 :::
 
 ## Ejemplo: Los naturales con la suma
+
+. . .
 
 ¿Cómo transformar cualquier suma de naturales a un natural puro?
 
@@ -205,6 +234,8 @@ $$\frac{succ(x)\ plus\ y}{x\ plus\ succ(y)}$$
 
 ## Ejemplo: Los naturales con la suma
 
+. . .
+
 ::: incremental
 
 - Partiendo de
@@ -219,15 +250,41 @@ $$succ(succ(succ(zero)))$$
 
 ## Ejemplo: Los naturales con la suma
 
+. . .
+
 Ahora ustedes transformen
-$$succ(zero)\ plus\ succ(succ(zero))\ plus\ zero$$
+$$succ(zero)\ plus\ succ(succ(zero))$$
 \vspace*{165 pt}
 
 ## En conclusión...
 
+. . .
+
 ::: incremental
 
 - Un __lenguaje formal__ es un conjunto de _simbolos_ con una _sintaxis_.
-- Un __aparato deductivo__ permite transformar las _fórmulas_ de un __lenguaje__ usando _reglas de inferencia_.
+- Un __aparato deductivo__ permite transformar las _fórmulas_ de un __lenguaje__ usando _reglas de inferencia_, este proceso se conoce como __derivación__.
 - Cuando un __lenguaje formal__ cuenta con un __aparato deductivo__, este pasa a ser un __sistema formal__. 
+:::
+
+
+# Lógica como sistema formal
+
+## Lógica como sistema formal
+
+. . .
+
+::: incremental
+
+- El alfabeto: 
+$$A = \{\lnot, \land, \lor, (, ), p, q, r, s, ...\}$$
+- La sintaxis:
+\begin{align*}
+    \PVerb{sentence} &\rightarrow \PVerb{atomic_sentence} \mid \PVerb{complex_sentence} \\
+    \PVerb{atomic_sentence} &\rightarrow \bm{True} \mid \bm{False} \mid \bm{p} \mid \bm{q} \mid \bm{r} \mid \bm{s} \mid ... \\
+    \PVerb{complex_sentence} &\rightarrow  \PVerb{unary_op}\ \PVerb{sentence} \\
+    \PVerb{complex_sentence} &\rightarrow  \bm{(} \PVerb{sentence}\ \PVerb{binary_op}\ \PVerb{sentence} \bm{)}\\
+    \PVerb{unary_op} &\rightarrow \bm{\lnot} \\
+    \PVerb{binary_op} &\rightarrow \bm{\land} \mid \bm{\lor} \\
+\end{align*}
 :::
