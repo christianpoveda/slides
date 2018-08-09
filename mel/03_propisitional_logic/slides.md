@@ -45,78 +45,164 @@ $$A = \{\lnot, \land, \lor, (, ), p, q, r, s, ...\}$$
 
 ## Semántica
 
+. . .
+
+::: incremental
+
 - Todas las __fórmulas__ representan __proposiciones__ o __afirmaciones__.
 - $True$/$False$ representa la proposición que siempre es verdadera/falsa.
 - $p$, $q$, $r$, ... son __variables proposicionales__ y pueden usarse para representar cualquier proposición.
 $$p\equiv\textrm{hoy está lloviendo}$$
 - $\lnot$, $\land$ y $\lor$ son __operaciones lógicas__.
 - para entender el significado de las operaciones lógicas hacemos uso de __tablas de verdad__.
+:::
 
 ## El operador $\lnot$
 
-- Si $p$ es una proposición cualquiera, $\lnot p$ representa la __negación de $p$__ o simplemente __no $p$__.
+. . .
 
+::: incremental
+
+- Si $p$ es una proposición cualquiera, $\lnot p$ representa la __negación de $p$__ o simplemente __no $p$__.
 - Su tabla de verdad es:
 \begin{center}
   \begin{tabular}{ | c | c | }
     \hline
-    $p$ & $\lnot p$ \\ \hline
-    $True$ & $False$ \\
-    $False$ & $True$ \\
+    $p$     & $\lnot p$ \\ \hline
+    $True$  & $False$   \\
+    $False$ & $True$    \\
     \hline
   \end{tabular}
 \end{center} 
-
 - Ejemplo:
 \begin{align*}
     p &\equiv \textrm{ahora está lloviendo} \\
     \lnot p &\equiv \textrm{ahora no está lloviendo} \\
 \end{align*}
+:::
 
 ## El operador $\land$
 
-- Si $p$ es una proposición cualquiera, $p \land q$ representa la __conjunción entre $p$ y $q$__ o simplemente __$p$ y $q$__.
+. . .
 
-- Su tabla de verdad es:
+::: incremental
+
+- Si $p$ y $q$ son dos proposiciones, $(p \land q)$ representa la __conjunción entre $p$ y $q$__ o simplemente __$p$ y $q$__.
+- Su tabla de verdad es: \vspace*{10px}
 \begin{center}
   \begin{tabular}{ | c | c | c | }
     \hline
-      $p$  & $q$ & $p \land q$ \\ \hline
+      $p$     & $q$     & $(p \land q)$ \\ \hline
       $True$  & $True$  & $True$  \\
-      $True $ & $False$ & $False$  \\
-      $False$ & $True$  & $False$  \\
-      $False$ & $False$ & $False$  \\
+      $True $ & $False$ & $False$ \\
+      $False$ & $True$  & $False$ \\
+      $False$ & $False$ & $False$ \\
     \hline
   \end{tabular}
 \end{center}
-
 - Ejemplo:
 \begin{align*}
     p &\equiv \textrm{ahora está lloviendo} \\
     q &\equiv \textrm{tengo mi sombrilla} \\
     p \land q &\equiv \textrm{ahora está lloviendo y tengo mi sombrilla} \\
 \end{align*}
+:::
 
 ## El operador $\lor$
 
-- Si $p$ es una proposición cualquiera, $p \lor q$ representa la __disyunción entre $p$ y $q$__ o simplemente __$p$ o $q$__.
+. . .
 
-- Su tabla de verdad es:
+::: incremental
+
+- Si $p$ y $q$ son dos proposiciones, $(p \lor q)$ representa la __disyunción entre $p$ y $q$__ o simplemente __$p$ o $q$__.
+- Su tabla de verdad es: \vspace*{10px}
 \begin{center}
   \begin{tabular}{ | c | c | c | }
     \hline
-      $p$  & $q$ & $p \land q$ \\ \hline
+      $p$     & $q$     & $(p \land q)$ \\ \hline
       $True$  & $True$  & $True$  \\
       $True $ & $False$ & $True$  \\
       $False$ & $True$  & $True$  \\
-      $False$ & $False$ & $False$  \\
+      $False$ & $False$ & $False$ \\
     \hline
   \end{tabular}
 \end{center}
-
 - Ejemplo:
 \begin{align*}
     p &\equiv \textrm{ahora está lloviendo} \\
     q &\equiv \textrm{tengo mi sombrilla} \\
-    p \land q &\equiv \textrm{ahora está lloviendo o tengo mi sombrilla} \\
+    p \lor q &\equiv \textrm{ahora está lloviendo o tengo mi sombrilla} \\
 \end{align*}
+:::
+
+## Combinando operadores
+
+. . .
+
+::: incremental
+
+- Ahora podemos decidir el __valor de verdad__ de cualquier __fórmula__ de nuestro lenguaje.
+- Por ejemplo, la tabla de verdad de $(\lnot p \land q)$: \vspace*{10px}
+\begin{center}
+  \begin{tabular}{ | c | c | c | c | }
+    \hline
+      $p$     & $q$     & $\lnot p$ & $(\lnot p \land q)$ \\ \hline
+      $True$  & $True$  & $False$   & $False$       \\
+      $True$  & $False$ & $False$   & $False$       \\
+      $False$ & $True$  & $True$    & $True$        \\
+      $False$ & $False$ & $True$    & $False$       \\
+    \hline
+  \end{tabular}
+\end{center}
+:::
+
+## Combinando operadores
+
+- Ahora ustedes calculen la tabla de verdad de $(\lnot p \lor q)$
+\vspace*{165 pt}
+
+## Extendiendo nuestro lenguaje
+
+. . .
+
+::: incremental
+- Si $p$ y $q$ son dos proposiciones, $(p \Rightarrow q)$ representa el __condicional material entre $p$ y $q$__ o simplemente __si $p$ entonces $q$__.
+- Su tabla de verdad es: \vspace*{10px}
+\begin{center}
+  \begin{tabular}{ | c | c | c | }
+    \hline
+      $p$     & $q$     & $(p \Rightarrow q)$ \\ \hline
+      $True$  & $True$  & $True$  \\
+      $True $ & $False$ & $False$  \\
+      $False$ & $True$  & $True$  \\
+      $False$ & $False$ & $True$ \\
+    \hline
+  \end{tabular}
+\end{center} \vspace*{10px}
+- Hay que tener cuidado con la interpretación:
+    - Si Colombia gana el próximo mundial, entonces Bogotá queda en Sudamérica.
+    - Si ahora está lloviendo, entonces yo tengo mi sombrilla.
+:::
+
+## Otra extensión: Equivalencias
+
+. . .
+
+::: incremental
+
+- Como $(\lnot p \lor q)$ y $(p \Rightarrow q)$ siempre tienen el __mismo valor de verdad__, decimos que son __equivalentes__.
+$$((\lnot p \lor q) \equiv (p \Rightarrow q))$$
+- Sin embargo son __fórmulas__ distintas porque estan construidas con distintos __símbolos__.
+- La tabla de verdad de $(p \equiv q)$ es: \vspace*{10 px}
+\begin{center}
+  \begin{tabular}{ | c | c | c | }
+    \hline
+      $p$     & $q$     & $(p \equiv q)$ \\ \hline
+      $True$  & $True$  & $True$  \\
+      $True $ & $False$ & $False$  \\
+      $False$ & $True$  & $False$  \\
+      $False$ & $False$ & $True$ \\
+    \hline
+  \end{tabular}
+\end{center}
+:::
