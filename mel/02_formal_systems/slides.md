@@ -177,7 +177,7 @@ $$A = \{0, 1\}$$
 - La sintaxis: 
 \begin{align*}
     \PVerb{binario} &\rightarrow \PVerb{digito} \\
-    \PVerb{binario} &\rightarrow \PVerb{digito}\ \PVerb{binario} \\
+    \PVerb{binario} &\rightarrow \PVerb{binario}\ \PVerb{digito} \\
     \PVerb{digito} &\rightarrow \bm{0} \mid \bm{1} \\
 \end{align*}
 
