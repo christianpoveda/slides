@@ -1,11 +1,12 @@
 % Lógica proposicional
-% Matemática estructural y lógica 
+% Matemática estructural y lógica
 % ISIS-1104
 
 ---
 header-includes:
 - \usepackage{examplep}
 - \usepackage{bm}
+- \usepackage{nicefrac}
 ---
 
 # Lógica como sistema formal
@@ -16,8 +17,8 @@ header-includes:
 
 ::: incremental
 
-- El alfabeto: 
-$$A = \{\lnot, \land, \lor, (, ), p, q, r, s, ...\}$$
+- El alfabeto:
+$$A = \{\lnot, \land, \lor, (, ), True, False, p, q, r, s, ...\}$$
 - La sintaxis:
 \begin{align*}
     \PVerb{sentence} &\rightarrow \PVerb{atomic_sentence} \mid \PVerb{complex_sentence} \\
@@ -73,7 +74,7 @@ $$p\equiv\textrm{hoy está lloviendo}$$
     $False$ & $True$    \\
     \hline
   \end{tabular}
-\end{center} 
+\end{center}
 - Ejemplo:
 \begin{align*}
     p &\equiv \textrm{ahora está lloviendo} \\
@@ -205,4 +206,70 @@ $$((\lnot p \lor q) \equiv (p \Rightarrow q))$$
     \hline
   \end{tabular}
 \end{center}
+:::
+
+## El resultado final
+
+. . .
+
+::: incremental
+
+- El alfabeto:
+$$A = \{\lnot, \land, \lor, \Rightarrow, \equiv, (, ), True, False, p, q, r, s, ...\}$$
+- La sintaxis:
+\begin{align*}
+    \PVerb{sentence} &\rightarrow \PVerb{atomic_sentence} \mid \PVerb{complex_sentence} \\
+    \PVerb{atomic_sentence} &\rightarrow \bm{True} \mid \bm{False} \mid \bm{p} \mid \bm{q} \mid \bm{r} \mid \bm{s} \mid ... \\
+    \PVerb{complex_sentence} &\rightarrow  \PVerb{unary_op}\ \PVerb{sentence} \\
+    \PVerb{complex_sentence} &\rightarrow  \bm{(} \PVerb{sentence}\ \PVerb{binary_op}\ \PVerb{sentence} \bm{)}\\
+    \PVerb{unary_op} &\rightarrow \bm{\lnot} \\
+    \PVerb{binary_op} &\rightarrow \bm{\land} \mid \bm{\lor} \\
+\end{align*}
+:::
+
+# De la lógica proposicional, los paréntesis y otros demonios
+
+## El problema
+
+. . .
+
+::: incremental
+
+- Tengamos en cuenta la siguiente fórmula bien formada
+$$((((\lnot p \land q) \land r) \Rightarrow ((r \lor t) \lor u)) \land v)$$
+- El uso de paréntesis hace difícil su lectura, entonces
+$$\lnot p \land q \land r \Rightarrow r \lor t \lor u \land v$$
+- Necesitamos una convención para evitar ambigüedad.
+:::
+
+## Precedencia de operadores
+
+. . .
+
+Tomaremos una convención prestada de la aritmética
+
+. . .
+
+::: incremental
+
+- Las operaciones $*$ y $/$ tienen precedencia sobre $+$ y $-$:
+$$ 2 * 3 + 5 = (2 * 3) + 5$$
+$$ 6 - 8 / 2 = 6 - (8 / 2)$$
+- Las operaciones con la misma precedencia son asociativas a izquierda:
+$$ 2 - 3 + 5 = (2 - 3) + 5 $$
+$$ 10 / 5 * 2 = (10 / 5) * 2 $$
+:::
+
+## Precedencia de operadores
+
+. . .
+
+::: incremental
+
+- La precedencia de operadores lógicos que tomaremos es
+$$\lnot \textrm{ precede a } \nicefrac{\land}{\lor} \textrm{ precede a } \Rightarrow \textrm{ precede a } \equiv$$
+- Las operaciones son asociativas a izquierda.
+- Ejemplo
+$$p \Rightarrow \lnot q \land r \lor s \textrm{ es lo mismo que } (p \Rightarrow ((\lnot q \land r) \lor s))$$
+- Dado que esto es una convención, no lo incluiremos dentro de la sintaxis de nuestro lenguaje.
 :::
