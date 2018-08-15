@@ -158,11 +158,11 @@ Usualmente la segunda es más fácil.
 - Partimos de
 $$ (p \land q) \lor (p \land \lnot q) $$
 - Usando distribución
-$$(p \land q) \lor (p \land \lnot q) \equiv p \lor (q \land \lnot q)$$
+$$(p \land q) \lor (p \land \lnot q) \equiv p \land (q \lor \lnot q)$$
 - Usando todo o nada
-$$p \lor (q \land \lnot q) \equiv p \lor False$$
+$$p \land (q \lor \lnot q) \equiv p \lor True$$
 - Usando identidad
-$$p \lor False \equiv p$$
+$$p \land True \equiv p$$
 - Luego concluimos que
 $$(p \land q) \lor (p \land \lnot q) \equiv p$$
 :::
@@ -175,8 +175,8 @@ $$(p \land q) \lor (p \land \lnot q) \equiv p$$
 
 - Otra forma de escribir esta prueba es
 \begin{align*}
-    (p \land q) \lor (p \land \lnot q) & \equiv p \lor (q \land \lnot q) \tag{distribución} \\
-    &\equiv p \lor False \tag{todo o nada} \\
+    (p \land q) \lor (p \land \lnot q) & \equiv p \land (q \lor \lnot q) \tag{distribución} \\
+    &\equiv p \land True \tag{todo o nada} \\
     &\equiv p \tag{identidad} \\
 \end{align*}
 - Tras bastidores simplemente estamos mostrando que $p \equiv (p \land q) \lor (p \land \lnot q)$
@@ -204,7 +204,7 @@ es __verdadera__ sin importar que valores puedan llegar a tomar $p$ y $q$.
 ::: incremental
 
 - Pedir una demostración de $p$ es lo mismo que pedir una demostración de que $p$ es una __tautología__.
-- En otras palabras, basta mostrar que a partir de $p$ puedo llegar a $True$.
+- En otras palabras, basta mostrar que a partir de $p$ puedo llegar a $True$ usando __equivalencias__.
 $$p \equiv True$$
 :::
 
@@ -234,4 +234,111 @@ __Demostración:__
 . . .
 
 - Ahora ustedes demuestren que $p \land q \then p$
+\vspace*{165 pt}
+
+## Reglas de inferencia
+
+. . .
+
+::: incremental
+
+- Las reglas de inferencia en lógica son expresiones de la forma
+$$ \frac{P_1 \land P_2 \land ... \land P_n}{C}$$
+- Una regla de inferencia es cierta si la siguiente __proposición__ es una __tautología__
+$$ (P_1 \land P_2 \land ... \land P_n) \then C \tag{1}$$
+- Se usan de la siguiente manera:
+$$\text{Si tengo } P_1 \land P_2 \land ... \land P_n \text{ puedo derivar } C$$
+- Dado que $(1)$ __no__ es una __equivalencia__, sólo puedo usarla en __un sentido__.
+:::
+
+## Reglas de inferencia
+
+. . .
+
+::: incremental
+
+- Modus Ponens:
+$$\frac{(p) \land (p \then q)}{q}$$
+- Modus Tollens:
+$$\frac{(\lnot q) \land (p \then q)}{\lnot p}$$
+- Silogismo hipotético:
+$$\frac{(p \then q) \land (q \then r)}{p \then r}$$
+- Silogismo disyuntivo:
+$$\frac{(p \lor q) \land (\lnot p)}{q}$$
+:::
+
+## Reglas de inferencia
+
+. . .
+
+::: incremental
+
+- Adición:
+$$\frac{(p)}{p \lor q}$$
+- Simplificación:
+$$\frac{(p \land q)}{p}$$
+- Resolución:
+$$\frac{(p \lor q) \land (\lnot p \lor r)}{q \lor r}$$
+:::
+
+## Cuando usarlas?
+
+. . .
+
+::: incremental
+
+- Si queremos demostrar una proposición de la forma
+$$p \then q$$
+- Usamos reglas de inferencia partiendo de $p$ hasta llegar a $q$.
+- Nos referimos a $p$ como la/las __hipótesis__.
+- Nos referimos a $q$ como la __conclusión__.
+:::
+
+## Ejemplo: Una prueba estructurada
+
+. . .
+
+Demuestre que
+$$(\lnot p \land q) \land (r \then p) \land (\lnot r \then s) \land (s \then t) \then t$$
+
+. . .
+
+__Demostración:__
+
+. . .
+
+::: incremental
+
+- Primero nombramos nuestras hipótesis:
+\begin{align*}
+(\lnot p \land q) \tag{1} \\
+(r \then p)  \tag{2} \\
+(\lnot r \then s)  \tag{3} \\
+(s \then t)  \tag{4} \\
+\end{align*}
+- Ahora usando reglas de inferencia tratamos de derivar la conclusión $t$.
+:::
+
+## Ejemplo: Una prueba estructurada
+
+. . .
+
+::: incremental
+
+- Aplicando silogismo hipotético entre (3) y (4):
+$$\frac{(\lnot r \then s) \land (s \then t)}{\lnot r \then t} \tag{5}$$
+- Aplicando simplificación a (1):
+$$\frac{(\lnot p \land q)}{\lnot p} \tag{6}$$
+- Aplicando modus tollens entre (6) y (2):
+$$\frac{(\lnot p) \land (r \then p)}{\lnot r} \tag{7}$$
+- Aplicando modus ponens entre (7) y (5):
+$$\frac{(\lnot r) \land (\lnot r \then t)}{t}$$
+:::
+
+## Ejercicio: Otra prueba estructurada
+
+. . .
+
+Ahora ustedes, demuestren que
+$$ (p) \land (s \then r) \land (p \then (q \land \lnot r)) \then \lnot s$$
 \vspace*{165 pt}
