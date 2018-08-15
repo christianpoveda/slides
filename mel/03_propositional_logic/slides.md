@@ -223,7 +223,7 @@ $$A = \{\lnot, \land, \lor, \Rightarrow, \equiv, (, ), True, False, p, q, r, s, 
     \PVerb{complex_sentence} &\rightarrow  \PVerb{unary_op}\ \PVerb{sentence} \\
     \PVerb{complex_sentence} &\rightarrow  \bm{(} \PVerb{sentence}\ \PVerb{binary_op}\ \PVerb{sentence} \bm{)}\\
     \PVerb{unary_op} &\rightarrow \bm{\lnot} \\
-    \PVerb{binary_op} &\rightarrow \bm{\land} \mid \bm{\lor} \\
+    \PVerb{binary_op} &\rightarrow \bm{\land} \mid \bm{\lor} \mid \bm{\Rightarrow} \mid \bm{\equiv} \\
 \end{align*}
 :::
 
