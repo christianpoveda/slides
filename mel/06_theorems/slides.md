@@ -164,5 +164,5 @@ $$\frac{p \land (p \then q)}{q}$$
 . . .
 
 Demuestre que
-$$(\lnot p \equiv q) \equiv (p \equiv \lnot p)$$
+$$(\lnot p \equiv q) \equiv (p \equiv \lnot q)$$
 \vspace*{165 pt}

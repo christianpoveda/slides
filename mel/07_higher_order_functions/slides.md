@@ -11,6 +11,34 @@ header-includes:
 
 Esta clase solo compila en Java 8 o superior
 
+## Ingeniería de software 101
+
+Supongan que tenemos el siguiente método
+
+```java
+public static List<Integer> sum2(List<Integer> lista) {
+    ArrayList<Integer> nLista = new ArrayList<Integer>();
+    for (Integer i: lista) {
+        nLista.add(i + 2);
+    }
+    return nLista;
+}
+```
+
+## Ingeniería de software 101
+
+Y este otro método
+
+```java
+public static List<Integer> mul2(List<Integer> lista) {
+    ArrayList<Integer> nLista = new ArrayList<Integer>();
+    for (Integer i: lista) {
+        nLista.add(i * 2);
+    }
+    return nLista;
+}
+```
+
 ## Ingenieria de software 101
 
 - Estos métodos son iguales salvo la función que estoy __aplicando__ sobre los elementos de la lista.
