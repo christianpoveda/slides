@@ -41,7 +41,7 @@
 \begin{frame}[fragile]
     \frametitle{Algunos ejemplos}
     \begin{itemize}
-        \item $+$ en $Int$, es asociativo, conmutativo y con $1$ como identidad.
+        \item $+$ en $Int$, es asociativo, conmutativo y con $0$ como identidad.
         \item $/$ en $Real$, es no asociativo, no conmutativo y sin identidad.
         \item $\lor$ en $Bool$, es asociativo, conmutativo y con $False$ como identidad.
         \item $\equiv$ en $Bool$, es asociativo, conmutativo y con $True$ como identidad.
@@ -75,7 +75,7 @@
 \begin{frame}[fragile]
     \frametitle{Cuantificadores vs. funciones de alto orden}
     En realidad un cuantificador es una combinación de funciones de alto orden
-        $$(\oplus t:T \mid Q:E$$
+        $$(\oplus t:T \mid Q:E)$$
     es lo mismo que
     \begin{minted}[escapeinside=||, autogobble]{java}
         static T quantifier(|$\oplus$|, |$Q$|, |$E$|, list) {
@@ -104,7 +104,7 @@
 
 \begin{frame}[fragile]
     \frametitle{Ahora ustedes}
-    $$(* i:Int \mid i \geq 0 \land i < 10 \land esPar(i): i/2)$$
+    $$(* i:Int \mid i > 0 \land i < 10 \land esPar(i): i/2)$$
     \vspace*{165 pt}
 \end{frame}
 
@@ -112,7 +112,7 @@
     \frametitle{Algunos casos particulares}
     \begin{itemize}
     \item Si no queremos filtrar hacemos el rango siempre verdadero:
-        $$(\oplus t:T \mid True:E\text{ o más corto }(\oplus t:T \mid:E)$$
+        $$(\oplus t:T \mid True:E)\text{ o más corto }(\oplus t:T \mid:E)$$
     \item Las cuantificaciones pueden depender de otros valores:
         $$(* i:Int \mid i>0 \land i < n :i)$$
     \item Podemos operar infinitos elementos
@@ -130,7 +130,7 @@
         \item Regla de un punto:
             $$(\oplus t \mid t = s: E) = E(s)$$
         \item Distributividad$^{*}$:
-            $$(\oplus t \mid Q: E_{1})\ \oplus\ (\oplus t \mid Q(t): E_{2}) = (\oplus t \mid Q: E_1 \oplus E_2)$$
+            $$(\oplus t \mid Q: E_{1})\ \oplus\ (\oplus t \mid Q: E_{2}) = (\oplus t \mid Q: E_1 \oplus E_2)$$
     \end{itemize}
 \end{frame}
 
@@ -149,8 +149,8 @@
 \begin{frame}[fragile]
     \frametitle{¿Cómo evaluar cuantificadores? Axiomas}
     \begin{itemize}
-        \item Intercambio de variables$^{*}$: Si $Q$ no depende de $t$ y $S$ no depende de $v$
-            $$(\oplus t \mid Q (\oplus v \mid S : E) = (\oplus v \mid S (\oplus t \mid Q : E)$$
+        \item Intercambio de variables$^{*}$: Si $Q$ no depende de $v$ y $S$ no depende de $t$
+            $$(\oplus t \mid Q : (\oplus v \mid S : E)) = (\oplus v \mid S : (\oplus t \mid Q : E))$$
         \item Anidamiento$^{*}$: Si $Q$ no depende de $v$
             $$(\oplus t,v \mid Q \land S : E) = (\oplus t \mid Q : (\oplus v \mid S : E))$$
         \item Renombramiento de variables: Si $Q$ y $E$ no dependen de $v$
