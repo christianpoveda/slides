@@ -241,7 +241,7 @@ public static Integer superSuma(List<Integer> lista) {
 }
 
 public static List<Integer> superO(List<Integer> lista) {
-    return filter(lista, (x, y) -> x || y, false);
+    return fold(lista, (x, y) -> x || y, false);
 }
 ```
 
