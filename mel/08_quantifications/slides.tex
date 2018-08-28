@@ -1,0 +1,126 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{amsmath}
+\usepackage{nicefrac}
+
+\usepackage{minted}
+\usepackage{fontspec}
+
+\usepackage{xcolor}
+
+\usemintedstyle{friendly}
+\setmonofont{Source Code Pro}
+\usetheme{metropolis}
+
+\newcommand{\then}{\Rightarrow}
+
+\title{Cuantificadores}
+\author{Matemática estructural y lógica}
+\institute{ISIS-1104}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}[fragile]
+    \frametitle{Operadores binarios}
+        Un operador binario sobre elementos de tipo $T$ es una función $T \times T \rightarrow T$
+            $$+:Int \times Int \rightarrow Int$$.
+        Decimos que un operador $\oplus:T \times T \rightarrow T$ es: 
+        \begin{itemize}
+            \item Asociativo si $(a \oplus b) \oplus c = a \oplus (b \oplus c)$
+            \item Conmutativo si $(a \oplus b) = (b \oplus a)$
+            \item Con $n$ como identidad si $(a \oplus n) = (n \oplus a) = a$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Algunos ejemplos}
+    \begin{itemize}
+        \item $+$ en $Int$, es asociativo, conmutativo y con $1$ como identidad.
+        \item $/$ en $Real$, es no asociativo, no conmutativo y sin identidad.
+        \item $\lor$ en $Bool$, es asociativo, conmutativo y con $False$ como identidad.
+        \item $\equiv$ en $Bool$, es asociativo, conmutativo y con $True$ como identidad.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Ahora ustedes!}
+    \begin{itemize}
+        \item $-$ en $Int$?
+        \item $*$ en $Int$?
+        \item $\land$ en $Bool$?
+        \item $\then$ en $Bool$?
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Cuantificadores}
+    Si $\oplus:T \rightarrow T \times T$ es conmutativo, asociativo y con identidad. Definimos su cuantificación como
+        $$(\oplus t:T \mid Q(t):E(t))$$
+    Lo cual se interpreta como
+        \begin{center}
+            \it{sobre todos los $t$ que cumplan $Q(t)$,\\ agregar el resultado de $E(t)$ usando $\oplus$}
+        \end{center}
+    $Q:T \rightarrow Bool$ se conoce como el \it rango.
+    
+    $E:T \rightarrow T$ se conoce como el \it cuerpo.
+\end{frame}
+
+
+\begin{frame}[fragile]
+    \frametitle{Cuantificadores vs. funciones de alto orden}
+    En realidad un cuantificador es una combinación de funciones de alto orden
+        $$(\oplus t:T \mid Q(t):E(t))$$
+    es lo mismo que
+    \begin{minted}[escapeinside=||, autogobble]{java}
+        static T quantifier(|$\oplus$|, |$Q$|, |$E$|, list) {
+            List<T> filtered = filter(|$Q$|, list);
+            List<T> mapped = map(|$E$|, filtered);
+            T folded = fold(|$\oplus$|, mapped);
+            return folded;
+        } 
+    \end{minted}
+    Un cuantificador aplica sobre todos los elementos de tipo $T$  mientras que \verb|quantifier| no.
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Un ejemplo}
+    $$(+ i:Int \mid i \geq 0 \land i < 6: 2i)$$
+    Podemos pensarlo como
+    \begin{itemize}
+        \item Filtramos: Nos quedamos con los $i$ que cumplan $i \geq 0 \land i < 6$.
+            $$[0, 1, 2, 3, 4, 5]$$
+        \item Mapeamos: Transformamos estos $i$ a $2i$
+            $$[0, 2, 4, 6, 8, 10]$$
+        \item Reducimos: Operamos usando $+$
+            $$0 + 2 + 4 + 6 + 8 + 10 = 30$$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Ahora ustedes}
+    $$(* i:Int \mid i \geq 0 \land i < 10 \land esPar(i): i/2)$$
+    \vspace*{165 pt}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Algunos casos particulares}
+    \begin{itemize}
+    \item Si no queremos filtrar hacemos el rango siempre verdadero:
+        $$(\oplus t:T \mid True:E(t))\text{ o más corto }(\oplus t:T \mid:E(t))$$
+    \item Las cuantificaciones pueden depender de otros valores:
+        $$(* i:Int \mid i>0 \land i < n :i)$$
+    \item Podemos operar infinitos elementos
+        $$(+ i:Int \mid i > 0:\nicefrac{1}{2^{i}}) = \frac{1}{2^{1}} + \frac{1}{2^{2}} + \frac{1}{2^{3}} + ... = 2$$
+    \item Pero no siempre tenemos que obtener un valor finito
+        $$(+ i:Int \mid i > 0: i) \text{ diverge }$$
+    \end{itemize}
+\end{frame}
+
+
+\end{document}
