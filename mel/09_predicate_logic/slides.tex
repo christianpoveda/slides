@@ -28,157 +28,217 @@
 
 \begin{frame}[fragile]
     \frametitle{¿Por qué las proposiciones no bastan?}
-
+    \pause
     Si tenemos el siguiente enunciado
+    \pause
     \begin{center}
         \textit{Toda la comida italiana es deliciosa.\\ 
         La pizza es comida italiana\\
         Luego la pizza es deliciosa}
     \end{center}
-    
+    \pause 
     La lógica proposicional es insuficiente para expresar casos particulares y generalizaciones.
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Predicados}
+        \pause
         Un predicado sobre $T$ es una función $T \rightarrow Bool$.
+        \pause
 
         $T$ puede ser cualquier conjunto (tipo) de elementos. Por ejemplo:
-
+        \pause
         \begin{itemize}
-            \item si $k: Int$, $P(k) = k > 0$
-            \item si $s:Persona$, $esAdulto(s) = s\text{ es un adulto}$.
+            \item Si tenemos $k: Int$, entonces $$P(k) = k > 0$$ es un predicado sobre $Int$.
+            \pause
+            \item Si tenemos $s:Persona$, entonces $$esAdulto(s) = s\text{ es un adulto}$$ es un predicado sobre $Persona$.
         \end{itemize}
-
+        \pause
         Como son funciones, los predicados no tienen un valor de verdad definido hasta que se evalúan en algún $t:T$.
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Predicados}
+        \pause
         Los predicados pueden combinarse usando las operaciones lógicas que ya conocemos.
+        \pause
 
         Por ejemplo si tenemos los predicados
+        \pause
         $$esAdulto(k) = k\text{ es un adulto}$$
+        \pause
         $$sabeConducir(k) = k\text{ sabe conducir}$$
+        \pause
         Podemos definir un nuevo predicado
+        \pause
         $$esAdulto(k) \land \lnot sabeConducir(k)$$
 \end{frame}
 \begin{frame}[fragile]
     \frametitle{Predicados}
+        \pause
         Todos los axiomas y reglas de inferencia de lógica proposicional siguen siendo válidos.
+        \pause
 
         Por ejemplo
         \begin{itemize}
+            \pause
             \item $P(x) \land P(x) \equiv P(x)$
+            \pause
             \item $P(x) \then Q(y) \equiv \lnot P(x) \lor Q(y)$
+            \pause
             \item $\lnot(P(x) \lor Q(x)) \equiv \lnot P(x) \land \lnot Q(x)$
+            \pause
             \item $P(x) \land (P(x) \then Q(x)) \then Q(x)$
         \end{itemize}
-
+        \pause
         Sin embargo hay que ser cuidadosos con las variables de los predicados
+        \pause
         $$P(x) \then Q(y) \not \equiv P(y) \then Q(x)$$
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Constantes}
+        \pause
         En ocasiones, queremos hacer referencia a algún elemento de $T$, para esto usamos constantes.
+        \pause
 
         Por ejemplo si tenemos el tipo $Animal$ y el predicado
+        \pause
         $$esGato(k) = k\text{ es un gato}$$
+        \pause
         podemos definir una constante $garfield: Animal$ y escribir
+        \pause
         $$esGato(garfield)$$
+        \pause
         para afirmar que la constante $garfield$ cumple el predicado $esGato$
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Cuantificador universal}
+        \pause
         Si tenemos el cuantificador 
         $$(\land x:T \mid P(x) : Q(x))$$
+        \pause
         Con $P$ y $Q$ predicados sobre $T$, podemos darle la interpretación
+        \pause
         \begin{center}
-            Paras todos los $x$ tales que $P(x)$, se cumple $Q(x)$.
+            Para todos los $x$ tales que $P(x)$, se cumple $Q(x)$.
         \end{center}
+        \pause
         Usualmente cambiamos el símbolo $\land$
         $$(\forall x:T \mid P(x) : Q(x))$$
+        \pause
         Por ejemplo
+        \pause
         $$(\forall x:Animal \mid esGato(x) : tieneBigotes(x))$$
+        \pause
         $$(\forall x:Animal \mid esGato(x) : sabeVolar(x))$$
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Cuantificador existencial}
+        \pause
         Si tenemos el cuantificador 
         $$(\lor x:T \mid P(x) : Q(x))$$
+        \pause
         Con $P$ y $Q$ predicados sobre $T$, podemos darle la interpretación
+        \pause
         \begin{center}
             Existen $x$ tales que $P(x)$, para los cuales se cumple $Q(x)$.
         \end{center}
+        \pause
         Usualmente cambiamos el símbolo $\land$
         $$(\exists x:T \mid P(x) : Q(x))$$
+        \pause
         Por ejemplo
+        \pause
         $$(\exists x:Animal \mid esGato(x) : comeLasagna(x))$$
+        \pause
         $$(\exists x:Animal \mid esGato(x) : esPerro(x))$$
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{De vuelta a la pizza}
-
+    \pause
     Si tomamos $C$ como el tipo de la comida. Y $pizza:C$ como una constante.
-
+    \pause
     \begin{center}
         \textit{Toda la comida italiana es deliciosa.\\ 
         La pizza es comida italiana.\\
         Luego la pizza es deliciosa.}
     \end{center}
-    
+    \pause
     Puede escribirse como
-
     $$\frac{(\forall c: C \mid esItaliana(c): esDeliciosa(c)),\ esItaliana(pizza)}{esDeliciosa(pizza)}$$
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Variables acotadas}
+    \pause
     Es necesario distinguir que variables están libres y cuales están acotadas en éste nuevo lenguaje.
+    \pause
 
     Por ejemplo:
     \begin{itemize}
+        \pause
         \item $x$ es libre en $x > 5$.
+        \pause
         \item $x$ es libre en $esGato(x)$.
+        \pause
         \item $n$ está acotada en $(\exists n: Int \mid esPar(n) : n > 0)$.
+        \pause
         \item $k$ es libre en $(\forall n: Int \mid esPrimo(n) : n < k)$.
     \end{itemize}
 
+    \pause
     Entonces
     \begin{itemize}
+        \pause
         \item $x$ está ligada si es la variable sobre la que estoy cuantificando.
+        \pause
         \item $x$ es libre si no estoy cuantificando sobre ella.
     \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Variables acotadas} 
-    Si $x$ es libre en una expresión, decimos que depende de $x$.
+    \pause
+    Si $x$ es libre en una cuantificación, decimos que la cuantificación depende de $x$.
     \begin{itemize}
+        \pause
         \item $esGato(a)$ depende de $a$.
+        \pause
         \item $(\exists n: Int \mid : n > k)$ depende de $k$.
+        \pause
         \item $(\exists n: Int \mid : n > 0)$ no depende de $n$.
     \end{itemize}
+    \pause
     Cuando una cuantificación depende de alguna variable podemos usarla como una proposición
+        \pause
         $$Q(k) = (\exists n: Int \mid : k = 2n)$$
+    \pause
     entonces
+        \pause
         $$(\forall z: Int \mid esPar(z) : Q(z))$$
+    \pause
     es lo mismo que
+        \pause
         $$(\forall z: Int \mid esPar(z) : (\exists n: Int \mid : z = 2n))$$
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Ahora ustedes}
+    \pause
+    ¿Cuáles de las siguientes variables son libres?
     \begin{itemize}
-        \item es $x$ libre en
+        \pause
+        \item $x$ en
             $$x + 1 = 5$$
-        \item son $a$ y $b$ libres en 
+        \pause
+        \item $a$, $b$ en 
             $$(\exists a: Animal \mid esGato(n) : sonAmigos(a,b))$$
-        \item son $x$, $y$, $z$ libres en 
+        \pause
+        \item $x$, $y$, $z$ en 
             $$(\forall z: Int \mid z > 0 : (\exists y: Int \mid y > 0 : x^2+y^2=z^2))$$
     \end{itemize}
 \end{frame}
