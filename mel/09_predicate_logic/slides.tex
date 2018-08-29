@@ -1,0 +1,186 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{amsmath}
+\usepackage{nicefrac}
+
+\usepackage{minted}
+\usepackage{fontspec}
+
+\usepackage{xcolor}
+
+\usemintedstyle{friendly}
+\setmonofont{Source Code Pro}
+\usetheme{metropolis}
+
+\newcommand{\then}{\Rightarrow}
+
+\title{Lógica de predicados}
+\author{Matemática estructural y lógica}
+\institute{ISIS-1104}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}[fragile]
+    \frametitle{¿Por qué las proposiciones no bastan?}
+
+    Si tenemos el siguiente enunciado
+    \begin{center}
+        \textit{Toda la comida italiana es deliciosa.\\ 
+        La pizza es comida italiana\\
+        Luego la pizza es deliciosa}
+    \end{center}
+    
+    La lógica proposicional es insuficiente para expresar casos particulares y generalizaciones.
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Predicados}
+        Un predicado sobre $T$ es una función $T \rightarrow Bool$.
+
+        $T$ puede ser cualquier conjunto (tipo) de elementos. Por ejemplo:
+
+        \begin{itemize}
+            \item si $k: Int$, $P(k) = k > 0$
+            \item si $s:Persona$, $esAdulto(s) = s\text{ es un adulto}$.
+        \end{itemize}
+
+        Como son funciones, los predicados no tienen un valor de verdad definido hasta que se evalúan en algún $t:T$.
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Predicados}
+        Los predicados pueden combinarse usando las operaciones lógicas que ya conocemos.
+
+        Por ejemplo si tenemos los predicados
+        $$esAdulto(k) = k\text{ es un adulto}$$
+        $$sabeConducir(k) = k\text{ sabe conducir}$$
+        Podemos definir un nuevo predicado
+        $$esAdulto(k) \land \lnot sabeConducir(k)$$
+\end{frame}
+\begin{frame}[fragile]
+    \frametitle{Predicados}
+        Todos los axiomas y reglas de inferencia de lógica proposicional siguen siendo válidos.
+
+        Por ejemplo
+        \begin{itemize}
+            \item $P(x) \land P(x) \equiv P(x)$
+            \item $P(x) \then Q(y) \equiv \lnot P(x) \lor Q(y)$
+            \item $\lnot(P(x) \lor Q(x)) \equiv \lnot P(x) \land \lnot Q(x)$
+            \item $P(x) \land (P(x) \then Q(x)) \then Q(x)$
+        \end{itemize}
+
+        Sin embargo hay que ser cuidadosos con las variables de los predicados
+        $$P(x) \then Q(y) \not \equiv P(y) \then Q(x)$$
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Constantes}
+        En ocasiones, queremos hacer referencia a algún elemento de $T$, para esto usamos constantes.
+
+        Por ejemplo si tenemos el tipo $Animal$ y el predicado
+        $$esGato(k) = k\text{ es un gato}$$
+        podemos definir una constante $garfield: Animal$ y escribir
+        $$esGato(garfield)$$
+        para afirmar que la constante $garfield$ cumple el predicado $esGato$
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Cuantificador universal}
+        Si tenemos el cuantificador 
+        $$(\land x:T \mid P(x) : Q(x))$$
+        Con $P$ y $Q$ predicados sobre $T$, podemos darle la interpretación
+        \begin{center}
+            Paras todos los $x$ tales que $P(x)$, se cumple $Q(x)$.
+        \end{center}
+        Usualmente cambiamos el símbolo $\land$
+        $$(\forall x:T \mid P(x) : Q(x))$$
+        Por ejemplo
+        $$(\forall x:Animal \mid esGato(x) : tieneBigotes(x))$$
+        $$(\forall x:Animal \mid esGato(x) : sabeVolar(x))$$
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Cuantificador existencial}
+        Si tenemos el cuantificador 
+        $$(\lor x:T \mid P(x) : Q(x))$$
+        Con $P$ y $Q$ predicados sobre $T$, podemos darle la interpretación
+        \begin{center}
+            Existen $x$ tales que $P(x)$, para los cuales se cumple $Q(x)$.
+        \end{center}
+        Usualmente cambiamos el símbolo $\land$
+        $$(\exists x:T \mid P(x) : Q(x))$$
+        Por ejemplo
+        $$(\exists x:Animal \mid esGato(x) : comeLasagna(x))$$
+        $$(\exists x:Animal \mid esGato(x) : esPerro(x))$$
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{De vuelta a la pizza}
+
+    Si tomamos $C$ como el tipo de la comida. Y $pizza:C$ como una constante.
+
+    \begin{center}
+        \textit{Toda la comida italiana es deliciosa.\\ 
+        La pizza es comida italiana.\\
+        Luego la pizza es deliciosa.}
+    \end{center}
+    
+    Puede escribirse como
+
+    $$\frac{(\forall c: C \mid esItaliana(c): esDeliciosa(c)),\ esItaliana(pizza)}{esDeliciosa(pizza)}$$
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Variables acotadas}
+    Es necesario distinguir que variables están libres y cuales están acotadas en éste nuevo lenguaje.
+
+    Por ejemplo:
+    \begin{itemize}
+        \item $x$ es libre en $x > 5$.
+        \item $x$ es libre en $esGato(x)$.
+        \item $n$ está acotada en $(\exists n: Int \mid esPar(n) : n > 0)$.
+        \item $k$ es libre en $(\forall n: Int \mid esPrimo(n) : n < k)$.
+    \end{itemize}
+
+    Entonces
+    \begin{itemize}
+        \item $x$ está ligada si es la variable sobre la que estoy cuantificando.
+        \item $x$ es libre si no estoy cuantificando sobre ella.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Variables acotadas} 
+    Si $x$ es libre en una expresión, decimos que depende de $x$.
+    \begin{itemize}
+        \item $esGato(a)$ depende de $a$.
+        \item $(\exists n: Int \mid : n > k)$ depende de $k$.
+        \item $(\exists n: Int \mid : n > 0)$ no depende de $n$.
+    \end{itemize}
+    Cuando una cuantificación depende de alguna variable podemos usarla como una proposición
+        $$Q(k) = (\exists n: Int \mid : k = 2n)$$
+    entonces
+        $$(\forall z: Int \mid esPar(z) : Q(z))$$
+    es lo mismo que
+        $$(\forall z: Int \mid esPar(z) : (\exists n: Int \mid : z = 2n))$$
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Ahora ustedes}
+    \begin{itemize}
+        \item es $x$ libre en
+            $$x + 1 = 5$$
+        \item son $a$ y $b$ libres en 
+            $$(\exists a: Animal \mid esGato(n) : sonAmigos(a,b))$$
+        \item son $x$, $y$, $z$ libres en 
+            $$(\forall z: Int \mid z > 0 : (\exists y: Int \mid y > 0 : x^2+y^2=z^2))$$
+    \end{itemize}
+\end{frame}
+
+\end{document}
