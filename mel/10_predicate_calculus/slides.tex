@@ -1,0 +1,102 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{amsmath}
+\usepackage{nicefrac}
+
+\usepackage{minted}
+\usepackage{fontspec}
+
+\usepackage{xcolor}
+
+\usemintedstyle{friendly}
+\setmonofont{Source Code Pro}
+\usetheme{metropolis}
+
+\newcommand{\then}{\Rightarrow}
+
+\title{Cálculo de predicados}
+\author{Matemática estructural y lógica}
+\institute{ISIS-1104}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}[fragile]
+    \frametitle{Axiomas de la lógica de predicados}
+    \textbf{Trueque:}
+    $$(\forall x \mid R : P) \equiv (\forall x \mid : R \then P)$$
+    En otras palabras
+    \begin{center}
+        \textit{"Para todo x tal que $R$ se tiene $P$"} \\
+        es lo mismo que \\
+        \textit{"Para todo x se tiene que si $R$ entonces $P$"}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Axiomas de la lógica de predicados}
+    \textbf{Distributividad entre $\lor$ y $\forall$:} \\
+    Si $P$ no depende de $x$
+    $$P \lor (\forall x \mid R : Q) \equiv (\forall x \mid R : P \lor Q)$$
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Axiomas de la lógica de predicados}
+    \textbf{Ley de De Morgan generalizada:} \\
+    $$\lnot (\exists x \mid Q : R) \equiv (\forall x \mid Q : \lnot R)$$
+    En otras palabras
+    \begin{center}
+        \textit{"Negar la existencia de un x que cumple $R$} \\
+        es lo mismo que \\
+        \textit{"Afirmar que para todo x se cumple que $\lnot R$"}
+    \end{center}
+    Es mas útil escribir esta regla como
+    $$(\exists x \mid Q : R) \equiv \lnot (\forall x \mid Q : \lnot R)$$
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Una demostración en lógica de predicados}
+    \textbf{Teorema:}
+    $$(\forall x \mid R : true) \equiv true$$
+    \textbf{Demostración:} \\
+    Por idempotencia $true \equiv true \lor true$, luego
+    $$(\forall x \mid R : true) \equiv (\forall x \mid R : true \lor true)$$
+    Usando distribución entre $\lor$ y $\forall$
+    $$(\forall x \mid R : true \lor true) \equiv true \lor (\forall x \mid R : true)$$
+    Usando techo
+    $$true \lor (\forall x \mid R : true) \equiv true$$
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Otra demostración en lógica de predicados}
+    \textbf{Teorema (Trueque para $\exists$):}
+    $$(\exists x \mid R : P) \equiv (\exists x \mid : R \land P)$$
+    \textbf{Demostración:} \\
+    \begin{align*}
+        (\exists x \mid R : P) &\equiv \lnot (\forall x \mid R : \lnot P) \tag{De Morgan gen.}\\ 
+        &\equiv \lnot (\forall x \mid : R \then \lnot P) \tag{trueque para $\forall$}\\
+        &\equiv \lnot (\forall x \mid : \lnot R \lor \lnot P) \tag{definición $\then$}\\
+        &\equiv \lnot (\forall x \mid : \lnot (R \land P)) \tag{De Morgan }\\
+        &\equiv (\exists x \mid : R \land P) \tag{De Morgan gen.}\\
+    \end{align*}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Ahora ustedes}
+    \textbf{Teorema (Distribución entre $\land$ y $\exists$):} \\
+    Si $P$ no depende de $x$:
+    $$P \land (\exists x \mid R : Q) \equiv (\exists x \mid : P \land Q)$$
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Ahora ustedes}
+    \textbf{Teorema:} \\
+    $$(\exists x \mid R : false) \equiv false$$
+\end{frame}
+
+\end{document}
