@@ -75,5 +75,5 @@ $$(p \then q) \land (q \then r) \land (\lnot r)\then (\lnot p)$$
 
 Verifiquen la correctitud del siguiente argumento
 
-_"En las noches, yo duermo o alucino. No estoy soñando. Yo veo elefantes rosados si alucino. Por lo tanto, veo elefantes rosados"_
+_"En las noches, yo duermo o alucino. No estoy durmiendo. Yo veo elefantes rosados si alucino. Por lo tanto, veo elefantes rosados"_
 \vspace*{165 pt}
