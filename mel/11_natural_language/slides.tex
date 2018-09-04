@@ -39,12 +39,18 @@
 
 \begin{frame}[fragile]
     \frametitle{Un ejemplo}
+    \pause
     Para traducir una afirmación a lógica de predicados se debe:
     \begin{itemize}
+        \pause
         \item Establecer el tipo de nuestras variables.
+        \pause
         \item Extraer las constantes de nuestra afirmación.
+        \pause
         \item Traducir los predicados más básicos de nuestra afirmación.
+        \pause
         \item Traducir las premisas y la conclusión
+        \pause
         \item Unir las premisas y conclusión
     \end{itemize}
 \end{frame}
@@ -52,12 +58,15 @@
 \begin{frame}[fragile]
     \frametitle{Un ejemplo}
     \begin{itemize}
+        \pause
         \item Todas las variables son de tipo $S$ o superhéroe.
+        \pause
         \item Constantes:
             \begin{align*}
                 t : S &= \text{el superhéroe Thor} \\
                 h : S &= \text{el superhéroe Hulk} \\
             \end{align*}
+        \pause
         \item Predicados:
             \begin{align*}
                 noThor(x) &\equiv (x \neq t) \\
@@ -70,15 +79,22 @@
 \begin{frame}[fragile]
     \frametitle{Un ejemplo}
     \begin{itemize}
+        \pause
         \item Premisas:
             \begin{itemize}
+                \pause
                 \item $\lnot (\exists x: S \mid noThor(x) : digno(x))$
+                \pause
                 \item $levanta(h, t)$
+                \pause
                 \item $digno(t)$
             \end{itemize}
+        \pause
         \item Conclusión: $digno(h)$
+        \pause
         \item Afirmación:
             $$\frac{\lnot (\exists x: S \mid noThor(x) : digno(x)) \land levanta(h, t) \land digno(t)}{digno(h)}$$
+        \pause
         \item Demostración: La próxima clase
     \end{itemize}
 \end{frame}
@@ -86,16 +102,22 @@
 \begin{frame}[fragile]
     \frametitle{Algunas reglas}
     \begin{itemize}
+        \pause
         \item $\forall$: Para todo, para cada, cualquier, todos
+        \pause
         \item $\exists$: Existe, para alguno, algún, hay, al menos uno..
+        \pause
         \item $\lnot \forall$: No todos
+        \pause
         \item $\lnot \exists$: No existe, para nadie, Ningún, no hay
     \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Ahora ustedes}
+    \pause
     Traducir las siguiente afirmación
+    \pause
     \begin{center}
         \textit{Todos los animales que ponen huevos son aves o mamíferos. \\
         Todo mamífero que pone huevos es un ornitorrinco. \\
@@ -103,6 +125,7 @@
         Perry no tiene plumas pero pone huevos. \\
         Luego, Perry es un ornitorrinco.}
     \end{center}
+    \vspace*{165 pt}
 \end{frame}
 
 \end{document}

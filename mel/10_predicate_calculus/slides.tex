@@ -28,8 +28,10 @@
 
 \begin{frame}[fragile]
     \frametitle{Axiomas de la lógica de predicados}
+    \pause
     \textbf{Trueque:}
     $$(\forall x \mid R : P) \equiv (\forall x \mid : R \then P)$$
+    \pause
     En otras palabras
     \begin{center}
         \textit{"Para todo x tal que $R$ se tiene $P$"} \\
@@ -40,6 +42,7 @@
 
 \begin{frame}[fragile]
     \frametitle{Axiomas de la lógica de predicados}
+    \pause
     \textbf{Distributividad entre $\lor$ y $\forall$:} \\
     Si $P$ no depende de $x$
     $$P \lor (\forall x \mid R : Q) \equiv (\forall x \mid R : P \lor Q)$$
@@ -47,36 +50,47 @@
 
 \begin{frame}[fragile]
     \frametitle{Axiomas de la lógica de predicados}
+    \pause
     \textbf{Ley de De Morgan generalizada:} \\
     $$\lnot (\exists x \mid Q : R) \equiv (\forall x \mid Q : \lnot R)$$
+    \pause
     En otras palabras
     \begin{center}
         \textit{"Negar la existencia de un x que cumple $R$} \\
         es lo mismo que \\
         \textit{"Afirmar que para todo x se cumple que $\lnot R$"}
     \end{center}
-    Es mas útil escribir esta regla como
+    \pause
+    Es mas útil escribir éste axioma como
     $$(\exists x \mid Q : R) \equiv \lnot (\forall x \mid Q : \lnot R)$$
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Una demostración en lógica de predicados}
+    \pause
     \textbf{Teorema:}
     $$(\forall x \mid R : true) \equiv true$$
+    \pause
     \textbf{Demostración:} \\
+    \pause
     Por idempotencia $true \equiv true \lor true$, luego
     $$(\forall x \mid R : true) \equiv (\forall x \mid R : true \lor true)$$
+    \pause
     Usando distribución entre $\lor$ y $\forall$
     $$(\forall x \mid R : true \lor true) \equiv true \lor (\forall x \mid R : true)$$
+    \pause
     Usando techo
     $$true \lor (\forall x \mid R : true) \equiv true$$
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Otra demostración en lógica de predicados}
+    \pause
     \textbf{Teorema (Trueque para $\exists$):}
     $$(\exists x \mid R : P) \equiv (\exists x \mid : R \land P)$$
+    \pause
     \textbf{Demostración:} \\
+    \pause
     \begin{align*}
         (\exists x \mid R : P) &\equiv \lnot (\forall x \mid R : \lnot P) \tag{De Morgan gen.}\\ 
         &\equiv \lnot (\forall x \mid : R \then \lnot P) \tag{trueque para $\forall$}\\
@@ -88,15 +102,28 @@
 
 \begin{frame}[fragile]
     \frametitle{Ahora ustedes}
+    \pause
     \textbf{Teorema (Distribución entre $\land$ y $\exists$):} \\
     Si $P$ no depende de $x$:
     $$P \land (\exists x \mid R : Q) \equiv (\exists x \mid : P \land Q)$$
+    \vspace*{165 pt}
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Ahora ustedes}
+    \pause
     \textbf{Teorema:} \\
     $$(\exists x \mid R : false) \equiv false$$
+    \vspace*{165 pt}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Ahora ustedes}
+    \pause
+    \textbf{Teorema:} \\
+    Si $P$ no depende de $x$:
+    $$Q \land (\exists x \mid : P) \equiv (\exists x \mid P : Q)$$
+    \vspace*{165 pt}
 \end{frame}
 
 \end{document}
