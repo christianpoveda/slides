@@ -126,4 +126,109 @@
     \vspace*{165 pt}
 \end{frame}
 
+\begin{frame}[fragile]
+    \frametitle{Reglas de inferencia: Eliminación}
+    Cuando razonamos de forma intuitiva, recurrimos a los siguientes argumentos:
+    \begin{center}
+        \textit{"Todos los perros son juiciosos, en particular Milou es juicioso."}
+
+        \vspace{10pt}
+
+        \textit{"Existen números interesantes, luego sea $k$ un número interesante."}
+    \end{center}
+    En otras palabras estamos \textbf{eliminando} cuantificaciones.
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Reglas de inferencia: Eliminación}
+    Cuando razonamos de forma intuitiva, recurrimos a los siguientes argumentos:
+    \begin{center}
+        $(\forall p \mid : juicioso(p)) \then juicioso(\text{milou})$
+
+        \vspace{10pt}
+
+        $(\exists n \mid : interesante(n)) \then interesante(k)$
+    \end{center}
+    En otras palabras estamos \textbf{eliminando} cuantificaciones.
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Reglas de inferencia: Eliminación}
+    \textbf{Eliminación $\forall$:} Si tenemos que $\big(\forall x \mid : P(x)\big)$, podemos asegurar que \textbf{cualquier} constante cumple $P$ 
+        $$\frac{\big(\forall x \mid : P(x)\big)} {P(c)\ \text{\footnotesize(cualquier $c$)}}$$
+    \textbf{Eliminación $\exists$:} Si tenemos que $\big(\exists x \mid : P(x)\big)$, podemos \textbf{introducir} una constante nueva que cumpla $P$
+    $$\frac{\big(\exists x \mid : P(x)\big)} {P(c)\ \text{\footnotesize(nueva $c$)}}$$
+    Se ven muy parecidas, pero la diferencia es grande.
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Reglas de inferencia: Introducción}
+    Cuando razonamos de forma intuitiva, recurrimos a los siguientes argumentos:
+    \begin{center}
+        \textit{"Messi es argentino. Por lo tanto, existen futbolistas argentinos."}
+
+        \vspace{10pt}
+
+        \textit{"Un futbolista es rápido. Luego cualquier futbolista es rápido."}
+
+    \end{center}
+    En otras palabras estamos \textbf{introduciendo} cuantificaciones.
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Reglas de inferencia: Introducción}
+    Cuando razonamos de forma intuitiva, recurrimos a los siguientes argumentos:
+    \begin{center}
+        $argentino(\text{messi}) \then \big(\exists j \mid : argentino(j)\big)$
+
+        \vspace{10pt}
+
+        $ rapido(j) \then \big(\forall j \mid : rapido(j)\big)$
+    \end{center}
+    En otras palabras estamos \textbf{introduciendo} cuantificaciones.
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Reglas de inferencia: Eliminación}
+    \textbf{Introducción $\exists$:} Si tenemos que $P(c)$, donde $c$ es una constante que \textbf{ya habíamos introducido}:
+    $$\frac {P(c)\ \text{\footnotesize($c$ ya introducida)}}{\big(\exists x \mid : P(x)\big)} $$
+    \textbf{Introducción $\forall$:} Si demostramos $P(c)$, donde $c$ es una constante \textbf{arbitraria}: 
+        $$\frac{P(c)\ \text{\footnotesize($c$ arbitraria)}}{\big(\forall x \mid : P(x)\big)}$$
+    Se ven muy parecidas, pero la diferencia es grande.
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Reglas de inferencia: Ejemplo}
+    \textbf{Teorema (súper Modus Ponens):}
+    $$\frac{\big(\forall x \mid P(x): Q(x)\big) \land P(c)}{Q(c)}$$
+    \textbf{Demostración:} \\
+    Usando trueque
+    $$\frac{\big(\forall x \mid P(x): Q(x)\big)}{\big(\forall x \mid : P(x) \then Q(x)\big)}$$
+    Usando eliminación 
+    $$\frac{\big(\forall x \mid : P(x) \then Q(x)\big)}{P(c) \then Q(c)}$$
+    Usando Modus Ponens
+    $$\frac{P(c)\land (P(c) \then Q(c))}{Q(c)}$$
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Reglas de inferencia: Ejercicio}
+    \textbf{Teorema (súper Silogismo Hipotético):}
+    $$\frac{\big(\forall x \mid P(x): Q(x)\big) \land (Q(c) \then R(c))}{P(c) \then R(c)}$$
+    \vspace{160pt}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Reglas de inferencia: Ejemplo}
+    \textbf{Teorema (debilitamiento del rango):}
+    $$\frac{(\forall x \mid P(x) \lor Q(x): R(x))}{(\forall x \mid P(x): R(x))} \hspace{20pt} \frac{(\exists x \mid P(x): R(x))}{(\forall x \mid P(x) \lor Q(x): R(x))}$$
+    \vspace{160pt}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Reglas de inferencia: Ejemplo}
+    \textbf{Teorema (debilitamiento del cuerpo):}
+    $$\frac{(\forall x \mid P(x) : Q(x) \land R(x))}{(\forall x \mid P(x): Q(x))} \hspace{20pt} \frac{(\exists x \mid P(x): R(x))}{(\exists x \mid P(x) : Q(x) \lor R(x))}$$
+    \vspace*{165 pt}
+\end{frame}
+
 \end{document}
