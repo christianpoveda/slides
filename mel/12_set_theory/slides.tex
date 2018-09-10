@@ -1,0 +1,60 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{amsmath}
+\usepackage{nicefrac}
+
+\usepackage{minted}
+\usepackage{fontspec}
+
+\usepackage{xcolor}
+
+\usemintedstyle{friendly}
+\setmonofont{Source Code Pro}
+\usetheme{metropolis}
+
+\newcommand{\then}{\Rightarrow}
+
+\title{Teoría de conjuntos}
+\author{Matemática estructural y lógica}
+\institute{ISIS-1104}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}[fragile]
+    \frametitle{Reglas}
+    \begin{itemize}
+        \item Un conjunto es una colección de elementos no repetidos.
+        \item Dos conjuntos son iguales si tienen los mismos elementos.
+        \item Un conjunto puede pertenecer a otro conjunto.
+        \item Ningún conjunto se contiene a si mismo.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{¿Cómo denotar conjuntos?}
+    \textbf{Notación extensional:} Simplemente escribimos todos los elementos dentro de
+    llaves
+    $$A = \{0, 1, 2, 3, 4\}$$
+    $$B = \{2, 4, 6, 8, 10, ...\}$$
+    \textbf{Notación intensional:} Escribimos algun predicado que los elementos del conjunto deben cumplir
+    $$A = \{x:\text{int} \mid x \geq 0 \land x < 5 \}$$
+    $$B = \{x:\text{int} \mid x > 0 \land x \text{ es par}\}$$    
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Pertenencia y contenecia}
+    Para afirmar que un elemento $x$ pertenece al conjunto $A$, escribimos el predicado
+    $$ x \in A$$
+    Podemos definir la igualdad de conjuntos utilizando pertenencia 
+    $$A = B \equiv (\forall x \mid : x \in A \equiv x \in B)$$
+    También podemos definir la contenencia de conjuntos
+    $$A \subseteq B \equiv (\forall x \mid : x \in A \then x \in B)$$
+\end{frame}
+
+\end{document}
