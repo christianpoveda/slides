@@ -29,52 +29,81 @@
 \begin{frame}[fragile]
     \frametitle{Reglas}
     \begin{itemize}
+        \pause
         \item Un conjunto es una colección de elementos no repetidos.
+        \pause
         \item Dos conjuntos son iguales si tienen los mismos elementos.
+        \pause
         \item Un conjunto puede pertenecer a otro conjunto.
+        \pause
         \item Ningún conjunto pertenece a si mismo.
     \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{¿Cómo denotar conjuntos?}
+    \pause
     \textbf{Notación extensional:} Simplemente escribimos todos los elementos dentro de
     llaves
+    \pause
     $$A = \{0, 1, 2, 3, 4\}$$
+    \pause
     $$B = \{2, 4, 6, 8, 10, ...\}$$
+    \pause
     \textbf{Notación intensional:} Escribimos algun predicado que los elementos del conjunto deben cumplir
+    \pause
     $$A = \{x:\text{int} \mid x \geq 0 \land x < 5 \}$$
+    \pause
     $$B = \{x:\text{int} \mid x > 0 \land x \text{ es par}\}$$    
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Pertenencia}
+    \pause
     Para afirmar que un elemento $x$ pertenece al conjunto $A$, escribimos el predicado
+    \pause
     $$x \in A\ \text{ o }\ x : A$$
+    \pause
     Para negar pertenencia escribimos 
+    \pause
     $$\lnot (x \in A)\ \text{ o }\ x \not \in A$$
+    \pause
     Dado que la notación intensional es de la forma
+    \pause
     $$\{x \mid P(x)\}$$
+    \pause
     Es natural afirmar que
+    \pause
     $$(y \in \{x \mid P(x)\}) \equiv P(y)$$
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Igualdad y contenencia}
+    \pause
     Podemos definir la igualdad de conjuntos utilizando pertenencia 
+    \pause
     $$(A = B) \equiv (\forall x \mid : x \in A \equiv x \in B)$$
+    \pause
     También podemos definir la contenencia de conjuntos
+    \pause
     $$(A \subseteq B) \equiv (\forall x \mid : x \in A \then x \in B)$$
+    \pause
     \textbf{Teorema:} $(A = B) \equiv (A \subseteq B) \land (B \subseteq A)$
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{El universo y el vacío}
+    \pause
     \textbf{Conjunto vacío:} Lo denotamos con el simbolo $\varnothing$, es el conjunto que no tiene elementos
+    \pause
     $$(\forall x \mid : x \not \in \varnothing)$$
+    \pause
     \textbf{Conjunto universo:} Lo denotamos con la letra $\mathcal{U}$, es el conjunto que contiene "todos" los elementos
+    \pause
     $$(\forall x \mid x \neq \mathcal{U}: x \in \mathcal{U})$$
+    \pause
     \textbf{Teorema:} Para cualquier conjunto $A$ se tiene que
+    \pause
     $$\varnothing \subseteq A$$
     $$A \subseteq \mathcal{U} \hspace{10pt} \text{(cuando $A \neq \mathcal{U}$)}$$
 \end{frame}
@@ -89,8 +118,6 @@
         $$A \cap B = \{x \mid (x \in A) \land (x \in B)\}$$
         \item Complemento de un conjunto
         $$A^{c} = \{x \mid \lnot(x \in A)\}$$
-        \item Producto cartesiano de conjuntos
-        $$A \times B = \{(x, y) \mid (x \in A) \land (x \in B)\}$$
     \end{itemize}
 \end{frame}
 
@@ -104,72 +131,88 @@
         $$(x \in A \cap B) \equiv (x \in A) \land (x \in B)$$
         \item Complemento de un conjunto
         $$(x \in A ^c) \equiv \lnot (x \in A)$$
-        \item Producto cartesiano de conjuntos
-            $$((x, y) \in A \times B) \equiv (x \in A) \land (x \in B)$$
     \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Teoría de conjuntos y lógica}
     En teoría de conjuntos son válidos los siguientes teoremas
-    \begin{align*}
-        A \cap B &= B \cap A \\ 
-        A \cap (B \cap C) &= (A \cap B) \cap C \\
-        A \cap (A \cup B) &= A \\
-        A \cap (B \cup C) &= (A \cap B) \cup (A \cap C) \\
-        A \cap A^{C} &= \varnothing \\
-        A \cap \mathcal{U} &= A \\
-        A \cap \varnothing &= \varnothing \\
-        A \cap A &= A \\
-        (A^C)^C &= A \\
-        (A \cap B)^c &= A^c \cup B^c \\
-    \end{align*}
+    \begin{eqnarray*}
+        A \cap B = B \cap A && A \cup B = B \cup A \\
+        \pause
+        A \cap (B \cap C) = (A \cap B) \cap C && A \cup (B \cup C) = (A \cup B) \cup C \\
+        \pause
+        A \cap (A \cup B) = A && A \cup (A \cap B) = A \\
+        \pause
+        A \cap (B \cup C) = (A \cap B) \cup (A \cap C) && A \cup (B \cap C) = (A \cup B) \cap (A \cup C) \\
+        \pause
+        A \cap A^{c} = \varnothing && A \cup A^{c} = \mathcal{U} \\
+        \pause
+        A \cap \mathcal{U} = A && A \cup \varnothing = A \\
+        \pause
+        A \cap \varnothing = \varnothing && A \cup \mathcal{U} = \mathcal{U} \\
+        \pause
+        A \cap A = A && A \cup A = A \\
+        \pause
+        (A \cap B)^c = A^c \cup B^c && (A \cup B)^c = A^c \cap B^c \\
+        \pause
+        (A^c)^c = A \\
+    \end{eqnarray*}
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Teoría de conjuntos y lógica}
     Porque en realidad son los mísmos axiomas de lógica proposicional
-    \begin{align*}
-        p \land q &\equiv q \land p \\
-        p \land (q \land r) &\equiv (p \land q) \land r \\
-        p \land (p \lor q) &\equiv p \\
-        p \land (q \lor r) &\equiv (p \land q) \lor (p \land r) \\
-        p \land \lnot p &\equiv False \\
-        p \land True &\equiv p \\
-        p \land False &\equiv False \\
-        p \land p &\equiv p \\
-        \lnot \lnot p &\equiv p \\
-        \lnot (p \land q) &\equiv \lnot p \lor \lnot q \\
-    \end{align*}
+    \begin{eqnarray*}
+        p \land q \equiv q \land p && p \lor q \equiv q \lor p \\
+        p \land (q \land r) \equiv (p \land q) \land r && p \lor (q \lor r) \equiv (p \lor q) \lor r \\
+        p \land (p \lor q) \equiv p && p \lor (p \land q) \equiv p \\
+        p \land (q \lor r) \equiv (p \land q) \lor (p \land r) && p \lor (q \land r) \equiv (p \lor q) \land (p \lor r) \\
+        p \land p^{c} \equiv False && p \lor p^{c} \equiv True \\
+        p \land True \equiv p && p \lor False \equiv p \\
+        p \land False \equiv False && p \lor True \equiv True \\
+        p \land p \equiv p && p \lor p \equiv p \\
+        \lnot (\lnot p) \equiv p \\
+    \end{eqnarray*}
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Un ejemplo}
+    \pause
     Demostremos que para cualquier conjunto $A$ se tiene que
     $$A \cap A^C = \varnothing$$
+    \pause
     Por definición de igualdad
     $$(\forall x \mid : (x \in A \cap A^c) \equiv (x \in \varnothing))$$
+    \pause
     Por $\forall$-eliminación
     $$(x \in A \cap A^c) \equiv (x \in \varnothing)$$
+    \pause
     Entonces partímos de $x \in A \cap A^c$ e intentamos llegar a $x \in \varnothing$
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Un ejemplo}
+    \pause
     Por definición de $\cap$
     $$(x \in A \cap A^c) \equiv (x \in A) \land (x \in A^c)$$
+    \pause
     Por definición de complemento
     $$(x \in A) \land (x \in A^c) \equiv (x \in A) \land \lnot (x \in A)$$
+    \pause
     Por \textbf{Piso}
     $$(x \in A) \land \lnot (x \in A) \equiv False$$
+    \pause
     Sin embargo, por definición de vacío tenemos que $\lnot (x  \in \varnothing)$, o equivalentemente
     $$False \equiv (x \in \varnothing)$$
+    \pause
     Luego
     $$(x \in A \cap A^c) \equiv (x \in \varnothing)$$
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Ahora ustedes}
+    \pause
     Demuestren que para cualquier conjunto $A$
     $$A \cup \varnothing = A$$
     \vspace{160pt}
@@ -177,26 +220,39 @@
 
 \begin{frame}[fragile]
     \frametitle{¿Por qué esto funciona?}
+    \pause
     Nuestras demostraciones consistieron en mostrar que
+    \pause
     $$A \cap A^c = \varnothing \text{ se podía convertir a } (x \in A) \land \lnot (x \in A) \equiv False$$
+    \pause
     $$A \cup \varnothing = A \text{ se podía convertir a } (x \in A) \lor False \equiv (x \in A)$$
+    \pause
     Esto \textbf{siempre} puede hacerse para cualquier afirmación sobre conjuntos y se conoce con el nombre de \textbf{teorema de representación}.
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{El teorema de representación}
+    \pause
     No tenemos el lenguaje adecuado para describir este teorema con exactitud,
     pero su enunciado sería algo así:
+    \pause
 
     \begin{center}
         Cualquier afirmación sobre conjuntos puede transformarse a un predicado sustituyendo
+    \pause
         \begin{itemize}
             \item "$\cap$" por "$\land$"
+    \pause
             \item "$\cup$" por "$\land$"
+    \pause
             \item "$c$" por "$\lnot$"
+    \pause
             \item "$=$" por "$\equiv$"
+    \pause
             \item "$\varnothing$" por "$False$"
+    \pause
             \item "$\mathcal{U}$" por "$True$"
+    \pause
             \item Cada conjunto "$A$" por el predicado "$x \in A$"
         \end{itemize}
     \end{center}
@@ -204,22 +260,26 @@
 
 \begin{frame}[fragile]
     \frametitle{Un ejemplo: De Morgan para conjuntos}
+    \pause
     \textbf{Teorema:}
     $$(A \cup B)^c = A^c \cap B^c$$
-    \textbf{Demostración:}
+    \pause
+    \textbf{Demostración:} \\
+    \pause
     Usando el teorema de representación
+    \pause
     $$\lnot((x \in A) \lor (x \in B)) \equiv \lnot(x \in A) \land \lnot(x \in B)$$
+    \pause
     Lo cual es trivial de demostrar usando De Morgan para proposiciones.
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Ahora ustedes}
+    \pause
     \textbf{Teorema:}
     $$A \cap (A \cup B) = A$$
     \vspace{165pt}
 \end{frame}
-
-
 
 \end{document}
 
