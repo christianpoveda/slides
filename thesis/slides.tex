@@ -1,0 +1,125 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{amsmath}
+\usepackage{nicefrac}
+
+\usepackage{minted}
+\usepackage{fontspec}
+
+\usepackage{xcolor}
+
+\usemintedstyle{friendly}
+\setmonofont{Source Code Pro}
+\usetheme{metropolis}
+
+\newcommand{\then}{\Rightarrow}
+
+\title{Bounded generics over constants in Rust}
+\author{Author: Christian Poveda \\ Advisor: Nicolás Cardozo}
+\institute{Systems and Computing Engineering Department \\ Universidad de los Andes}
+\date{2018-09-18}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}[fragile]
+    \frametitle{What is a type?}
+    Que es un tipo para un programador
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{What is a type?}
+    Que es un sitema de tipos para alguien que trabaja con sistemas de tipos
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Context: The Rust programming language}
+    Que es Rust, que lo hace distinto de otros lenguajes
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Context: Rust's type system}
+    Que sistema de tipos tiene Rust y que le permite hacer
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{The problem: Traits over arrays}
+    Rust no deja implementar traits sin tamaños especificos de arrays
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{The problem: Some example with bounds}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{The solution: Constant values as type parameters}
+    Presentar const-generics 
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{The solution: Bounds over constant values}
+    Presentar como poner bounds para const-generics 
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{The result: Arrays as const-generic types}
+    Con const generics, podemos implementar traits para tamaños genericos de arrays
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{The result: Solution to the bounds example}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Context: Generics over values in theory}
+    Circulos
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Context: Languages with dependent types}
+    Haskell, Idris, Agda, Coq, Otros. Mostrar número de papers en el último año para cada uno
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Context: Idris, a dependently typed language}
+    Como se ve Idris y que deja hacer
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Context: Rust Status Quo}
+    RFC-2000, que hay, que habrá y que quedará faltando
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Road Ahead: What needs to be done}
+    Desbaratar los ejemplos para mostrar que pasos hay que seguir, entre ellos unificación
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Road Ahead: Unification}
+    Mostrar que alternativas hay para implementarla
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Validation: Formal verification}
+    Proveer una prueba formal de que unificación y bounds son bien comportados 
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Validation: Comparison against other languages}
+    Con estas nuevas features hasta donde puede dar Rust al compararlo con lenguajes como Idris
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Validation: Integration with Rust}
+    Integrar este trabajo dentro de Rust como tal, RFCs y PRs al respecto
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Schedule}
+    El cronograma... para (no) cumplirlo
+\end{frame}
