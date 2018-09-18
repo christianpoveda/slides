@@ -152,7 +152,7 @@
 
 \begin{frame}[fragile]
     \frametitle{The solution: Arrays as const-generic types}
-    With generics over constant values, we can write traits and functions for any array size
+    With generics over constant values, we can write functions for any array size
     \begin{rustcode}
     fn add_arr<const N: usize> (a: &[f64; N], b: &[f64; N]) 
     -> [f64; N] {
@@ -275,4 +275,17 @@
 
 \begin{frame}[fragile]
     \frametitle{Schedule}
+    Thesis 1:
+    \begin{itemize}
+        \item Literature review: Weeks 1 to 8
+        \item Unification design: Weeks 9 to 12
+        \item Unification implementation: Weeks 12 to 16
+    \end{itemize}
+    Thesis 2:
+    \begin{itemize}
+        \item \code{with} syntax implementation: Weeks 1 to 3
+        \item Unification for boolean expressions: Weeks 3 to 5
+        \item Verification: Weeks 5 to 7
+        \item Document writing: Weeks 8 to 11
+    \end{itemize}
 \end{frame}
