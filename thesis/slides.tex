@@ -167,7 +167,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-    \frametitle{The problem: Dynamical check of static bounds}
+    \frametitle{The problem: Dynamic check of static bounds}
     Consider the following generic function
     \begin{rustcode}
         fn <const N: usize> head(a: [f64; N]) -> Option<f64> {
@@ -198,7 +198,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-    \frametitle{The solution: Statical check of static bounds}
+    \frametitle{The solution: Static check of static bounds}
     Now, we can write static bounds over constant parameters.
     \begin{rustcode}
         fn <const N: usize> head(a: [f64; N]) with {N > 0} -> f64 {
@@ -226,7 +226,7 @@
         \item Coq: An interactive theorem prover written in OCaml.
         \item Agda: An interactive theorem prover written in Haskell.
     \end{itemize}
-    On 2018, there were around $15$ papers about those languages and dependent types in POPL, OOPSLA, PLDI and ICFP.
+    In 2018, there were around $15$ papers about those languages and dependent types in POPL, OOPSLA, PLDI and ICFP.
 \end{frame}
 
 \begin{frame}[fragile]
@@ -280,12 +280,13 @@
         \item Literature review: Weeks 1 to 8
         \item Unification design: Weeks 9 to 12
         \item Unification implementation: Weeks 12 to 16
+        \item Document writing: Weeks 14 to 16
     \end{itemize}
     Thesis 2:
     \begin{itemize}
         \item \code{with} syntax implementation: Weeks 1 to 3
         \item Unification for boolean expressions: Weeks 3 to 5
         \item Verification: Weeks 5 to 7
-        \item Document writing: Weeks 8 to 11
+        \item Document writing: Weeks 5 to 11
     \end{itemize}
 \end{frame}
