@@ -24,7 +24,7 @@
 
 \title{Bounded generics over constants in Rust}
 \author{Author: Christian Poveda \\ Advisor: Nicolás Cardozo}
-\institute{Systems and Computing Engineering Department \\ Universidad de los Andes}
+\institute{Systems and Computing Engineering Department \\ Universidad de los Andes \\ \includegraphics[width=3cm]{./flag.png}}
 \date{2018-09-18}
 
 \begin{document}
@@ -37,7 +37,7 @@
     \begin{javacode}
         String myString = "Hello, World!";
     \end{javacode}
-    we would say \code{String} is the type of :\code{myString} and as such, it determines:
+    \code{String} is the type of \code{myString} and as such, it determines:
     \begin{itemize}
         \item The operations on which \code{myString} could be used.
         \item The values \code{myString} could take.
@@ -51,7 +51,7 @@
 
 \begin{frame}[fragile]
     \frametitle{Context: The Rust programming language}
-    Rust is a systems programming language focused on safety, speed and concurrency sponsored by Mozilla. 
+    Rust is a systems programming language focused on safety, speed and concurrency. It is sponsored by Mozilla. 
     
     However, Rust is not your typical language:
     \begin{itemize}
@@ -68,10 +68,10 @@
 
 \begin{frame}[fragile]
     \frametitle{Context: Rust's type system}
-    Rust's type system is based on the ML type system and as such it has
+    Rust's type system is based on the ML type system. As such it has:
     \begin{itemize}
-        \item Static type checking, i.e. programs are checked for safety during compilation.
-        \item Type inference, i.e. type annotations are not always needed.
+        \item Static type checking (i.e., programs are checked for safety during compilation).
+        \item Type inference (i.e., type annotations are not always needed).
         \item Polymorphism via traits and generics.
         \item Enums and Structs.
     \end{itemize}
@@ -120,7 +120,7 @@
 
 \begin{frame}[fragile]
     \frametitle{The solution: Generics over constants}
-    Generics are a kind polymorphism based on parametrizing types. For example
+    Generics are a way of archieving polymorphism based on parametrizing types. For example
     \begin{itemize}
         \item \code{Vec<T>} is the type of vectors of elements of type T
         \item \code{Vec<bool>} is the type of vectors of booleans
@@ -147,7 +147,7 @@
     \end{rustcode}
     Is important to say that the dispatch mechanism in Rust is static. 
     
-    On compilation, generics functions and types are specialized on demand.
+    On compilation, generic functions and generic types are specialized on demand.
 \end{frame}
 
 \begin{frame}[fragile]
@@ -178,7 +178,7 @@
             }
         }
     \end{rustcode}
-    The restriction \code{N > 0} is checked on runtime even though \code{N} will not change after compilation
+    The restriction \code{N > 0} is checked at runtime even though \code{N} will not change after compilation
 \end{frame}
 
 \begin{frame}[fragile]
@@ -193,7 +193,7 @@
         fn bar<const C: T> (args) -> ReturnType with P { ... }
     \end{rustcode}
 
-    Now, the type checker forces that any instance of \code{Foo} and \code{bar} over a constant satisfies \code{P}
+    Now, the type checker enforces that any instance of \code{Foo} and \code{bar} over a constant satisfies \code{P}
     
 \end{frame}
 
@@ -205,7 +205,7 @@
             a[0]
         }
     \end{rustcode}
-    Given that the bound \code{N > 0} is checked during compilation and not in runtime. This code is not just shorter, is faster.
+    Given that the bound \code{N > 0} is checked during compilation and not in runtime, this code is not just shorter, it is also faster.
 \end{frame}
 
 \begin{frame}[fragile]
@@ -219,35 +219,34 @@
 
 \begin{frame}[fragile]
     \frametitle{Related work: Rust Status Quo}
-    The Rust community is already working on an implementation of generics over constants. However, this implementation lacks of:
+    The Rust community is already working on an implementation of generics over constants. However, this implementation still needs:
     \begin{itemize}
         \item A mechanism to determine when two constant expressions are equal.
         \item A mechanism to add bounds over constant parameters.
         \item A mechanism to determine when two bounds are equal.
     \end{itemize}
-
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Road Ahead: What needs to be done}
     We want to:
     \begin{itemize}
-        \item Provide an unification algorithm for constant expressions.
+        \item Provide an unification algorithm for constant expressions to determine type equality on generic types over constants.
         \item Modify the parser and the subsequent compiler stages to add the \code{with} syntax.
-        \item Provide bound unification for boolean arithmetic expressions.
-        \item Integrate this changes into Chalk, the PROLOG interpreter for the Rust compiler.
+        \item Provide unification for boolean arithmetic expressions to determine type equality on bounded generic types over constants.
+        \item Integrate this changes into Chalk, the PROLOG interpreter written in Rust, as it will be integrated into the type checking process.
     \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Road Ahead: Unification}
     Rust compilation has several stages
-    $$\code{Rust} \overset{parse}{\longrightarrow} \code{AST} \overset{simplify}{\longrightarrow} \code{HIR} \overset{lower}{\longrightarrow} \code{MIR} \overset{executed\ by}{\longrightarrow} \code{miri}$$
+    $$\code{Rust} \rightarrow \code{AST} \rightarrow \code{HIR} \rightarrow \code{MIR} \rightarrow \code{miri} \rightarrow \code{LLVM IR} \rightarrow \code{Machine Language}$$
     The unification algorithm for constant expressions can be implemented in
     \begin{itemize}
         \item HIR or AST: Some constants could be in external libraries.
         \item MIR: Side effects would make unification too complex. 
-        \item miri: A simple unification algorithm could be done.
+        \item miri: A simple unification algorithm could be done,.
     \end{itemize}
     We are still deciding which alternative is better.
 \end{frame}
@@ -256,7 +255,7 @@
     \frametitle{Validation}
     We will
     \begin{itemize}
-        \item Provide formal verification of the unification algorithm either by hand or using a proof assistant.
+        \item Provide formal verification of the unification algorithm either by hand or using a proof assistant (Coq).
         \item Compare the capabilities of Rust with this new set of features against other dependently typed languages.
         \item Seek to integrate this work into Rust during 2019.
     \end{itemize}
