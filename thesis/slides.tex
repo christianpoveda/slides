@@ -20,6 +20,7 @@
 \newminted{java}{escapeinside=||, fontsize=\footnotesize, bgcolor=bg, autogobble, java}
 
 \newcommand{\then}{\Rightarrow}
+\newcommand{\code}[1] {\texttt{\footnotesize #1}}
 
 \title{Bounded generics over constants in Rust}
 \author{Author: Christian Poveda \\ Advisor: Nicolás Cardozo}
@@ -36,51 +37,43 @@
     \begin{javacode}
         String myString = "Hello, World!";
     \end{javacode}
-    we would say \texttt{\footnotesize String} is the type of \texttt{\footnotesize myString} and as such, it determines:
+    we would say \code{String} is the type of :\code{myString} and as such, it determines:
     \begin{itemize}
-        \item The operations on which \texttt{\footnotesize myString} could be used.
-        \item The values \texttt{\footnotesize myString} could take.
-        \item The type of \texttt{\footnotesize "Hello, World!"} (it should be \texttt{\footnotesize String}).
+        \item The operations on which \code{myString} could be used.
+        \item The values \code{myString} could take.
+        \item The type of \code{"Hello, World!"} (it should be \code{String}).
     \end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-    \frametitle{Context: What is a type?}
-    To be more specific: 
+    To be more general: 
     \begin{center}
         \textit{A type system is a syntatic method for proving the absence of certain program behaviors by classifying phrases according to the kinds of values they compute}
     \end{center}
-    Usually type systems are described using \textit{typing rules}:
-    $$true &: \texttt{\footnotesize Bool}$$ 
-    $$false &: \texttt{\footnotesize Bool}$$ 
-
-    $$\frac{t_1 : \texttt{\footnotesize Bool}\ t_2 : T\ t_3 : T}{\texttt{\footnotesize if}\ t_1\ \texttt{\footnotesize then}\ t_2\ \texttt{\footnotesize else}\ t_3\ : T}$$
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Context: The Rust programming language}
-    Rust is a systems programming language focused on safety, speed and concurrency. However, Rust is not your typical language:
+    Rust is a systems programming language focused on safety, speed and concurrency sponsored by Mozilla. 
+    
+    However, Rust is not your typical language:
     \begin{itemize}
-        \item It is blazingly fast (almost as fast as C++).
-        \item It has high-level features:
+        \item It does not have garbage collection nor pointer arithmetic, but it is memory safe.
+        \item It is blazingly fast (as fast as C++), but it has high-level features:
             \begin{itemize}
                 \item Pattern matching
                 \item Traits
                 \item Higher order functions
             \end{itemize}
-        \item It does not have garbage collection nor pointer arithmetic, but it is memory safe.
         \item It features concurrency without data races.
     \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Context: Rust's type system}
-    Rust's type system is based on the ML type system and it has
+    Rust's type system is based on the ML type system and as such it has
     \begin{itemize}
-        \item \textbf{Static type checking:} Programs are checked for safety during compilation.
-        \item \textbf{Type inference:} Type annotations are not always needed.
-        \item \textbf{Polymorphism}  via traits and generics.
-        \item \textbf{Algebraic data types:} It has enums and structs.
+        \item Static type checking, i.e. programs are checked for safety during compilation.
+        \item Type inference, i.e. type annotations are not always needed.
+        \item Polymorphis via traits and generics.
+        \item Enums and Structs.
     \end{itemize}
     It also takes care of memory safety
     \begin{itemize}
@@ -95,11 +88,8 @@
 
 \begin{frame}[fragile]
     \frametitle{The problem: Functions over arrays}
-    In Rust:
-    \begin{itemize}
-        \item Arrays (being stack allocated) must be statically sized.
-        \item Writing functions or traits for arrays is cumbersome.
-    \end{itemize}
+    In Rust, Arrays (being stack allocated) must be statically sized.
+
     As a consequence, this code compiles
     \begin{rustcode}
     fn add_arr(a: &[f64; 3], b: &[f64; 3]) -> [f64; 3] {
@@ -114,11 +104,8 @@
 
 \begin{frame}[fragile]
     \frametitle{The problem: Functions over arrays}
-    In Rust:
-    \begin{itemize}
-        \item Arrays (being stack allocated) must be statically sized.
-        \item Writing functions or traits for arrays is cumbersome.
-    \end{itemize}
+    In Rust, Arrays (being stack allocated) must be statically sized.
+
     But this code does not
     \begin{rustcode}
     fn add_arr(a: &[f64; N], b: &[f64; N]) -> [f64; N] {
@@ -132,17 +119,43 @@
 \end{frame}
 
 \begin{frame}[fragile]
-    \frametitle{The solution: Constant values as type parameters}
+    \frametitle{The solution: Generics over constants}
+    Generics are a kind polymorphism based on parametrizing types. For example
+    \begin{itemize}
+        \item \code{Vec<T>} is the type of vectors of elements of type T
+        \item \code{Vec<bool>} is the type of vectors of booleans
+        \item \code{Vec<i32>} is the type of vectors of integers
+    \end{itemize}
+    We could allow the same pattern letting constant values be parameters
+    \begin{itemize}
+        \item \code{[bool; N]} is the type of arrays of booleans and size N 
+        \item \code{[bool; 0]} is the type of arrays of booleans and size 0 
+        \item \code{[bool; 1]} is the type of arrays of booleans and size 1
+    \end{itemize}
+    We only use constants because Rust's type checking is static.
 \end{frame}
 
 \begin{frame}[fragile]
-    \frametitle{The result: Arrays as const-generic types}
+    \frametitle{The solution: Generics over constants}
+    In general, a type \code{Foo} parametrized by a constant \code{C} of type \code{T} would be written as
+    \begin{rustcode}
+        Foo<const C: T>
+    \end{rustcode}
+    In a similar fashion, a function \code{bar} parametrized by a constant \code{C} of type \code{T} would be written as
+    \begin{rustcode}
+        fn bar<const C: T> (args) -> ReturnType { ... }
+    \end{rustcode}
+    Is important to say that the dispatch mechanism in Rust is static. 
+    
+    On compilation, generics functions and types are specialized on demand.
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{The solution: Arrays as const-generic types}
     With generics over constant values, we can write traits and functions for any array size
     \begin{rustcode}
-    fn add_arr <const N: usize> (
-        a: &[f64; N],
-        b: &[f64; N]
-    ) -> [f64; N] {
+    fn add_arr<const N: usize> (a: &[f64; N], b: &[f64; N]) 
+    -> [f64; N] {
             let mut result = [0.0; N];
         for i in 0..N {
             result[i] = a[i] + b[i];
@@ -150,12 +163,12 @@
         result
     }
     \end{rustcode}
-    However, this adds a new problem about constant values as parameters
+    However, this is only a partial solution...
 \end{frame}
 
 \begin{frame}[fragile]
-    \frametitle{The problem: Checking bounds}
-    Even if we had generics over constant values, we still have to do dynamical checks for constant values 
+    \frametitle{The problem: Dynamical check of static bounds}
+    Consider the following generic function
     \begin{rustcode}
         fn <const N: usize> head(a: [f64; N]) -> Option<f64> {
             if N > 0 {
@@ -165,71 +178,90 @@
             }
         }
     \end{rustcode}
-    Even though the compiler has the value for  \texttt{N} (it is a constant), we are doing checks over \texttt{N} at run-time.
+    The restriction \code{N > 0} is checked on runtime even though \code{N} will not change after compilation
 \end{frame}
 
 \begin{frame}[fragile]
-    \frametitle{The solution: Bounds over value parameters}
+    \frametitle{The solution: Bounded generics over constant values}
+    Given that now constants are valid parameters. Rust's type checker could take care of checking properties over them.
 
+    If \code{P: bool} is a boolean expression depending on a constant \code{C}, we can restrict \code{C} as a parameter
+    \begin{rustcode}
+        // A generic type over a bounded constant
+        Foo<const C: T> with P
+        // A generic function over a bounded constant
+        fn bar<const C: T> (args) -> ReturnType with P { ... }
+    \end{rustcode}
+
+    Now, the type checker forces that any instance of \code{Foo} and \code{bar} over a constant satisfies \code{P}
+    
 \end{frame}
 
 \begin{frame}[fragile]
-    \frametitle{The result: Checking bounds}
+    \frametitle{The solution: Statical check of static bounds}
     Now, we can write static bounds over constant parameters.
     \begin{rustcode}
         fn <const N: usize> head(a: [f64; N]) with {N > 0} -> f64 {
             a[0]
         }
     \end{rustcode}
-    Given that the bound \texttt{\footnotesize N > 0} is checked during compilation and not in run-time. This code is not just shorter, is faster.
+    Given that the bound \code{N > 0} is checked during compilation and not in runtime. This code is not just shorter, is faster.
 \end{frame}
 
 \begin{frame}[fragile]
-    \frametitle{Context: Generics over values in theory}
+    \frametitle{Related work: Generics over values in theory}
     \includegraphics[width=\textwidth]{./theory.png}
 \end{frame}
 
 \begin{frame}[fragile]
-    \frametitle{Context: Languages with dependent/liquid types}
-    Haskell, Idris, Agda, Coq, Otros. Mostrar número de papers en el último año para cada uno
+    \frametitle{Related work: Languages with dependent types}
 \end{frame}
 
 \begin{frame}[fragile]
-    \frametitle{Context: Idris, a dependently typed language}
-    Como se ve Idris y que deja hacer
-\end{frame}
+    \frametitle{Related work: Rust Status Quo}
+    The Rust community is already working on an implementation of generics over constants. However, this implementation lacks of:
+    \begin{itemize}
+        \item A mechanism to determine when two constant expressions are equal.
+        \item A mechanism to add bounds over constant parameters.
+        \item A mechanism to determine when two bounds are equal.
+    \end{itemize}
 
-\begin{frame}[fragile]
-    \frametitle{Context: Rust Status Quo}
-    RFC-2000, que hay, que habrá y que quedará faltando
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Road Ahead: What needs to be done}
-    Desbaratar los ejemplos para mostrar que pasos hay que seguir, entre ellos unificación
+    We want to:
+    \begin{itemize}
+        \item Provide an unification algorithm for constant expressions.
+        \item Modify the parser and the subsequent compiler stages to add the \code{with} syntax.
+        \item Provide bound unification for boolean arithmetic expressions.
+        \item Integrate this changes into Chalk, the PROLOG interpreter for the Rust compiler.
+    \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Road Ahead: Unification}
-    Mostrar que alternativas hay para implementarla
+    Rust compilation has several stages
+    $$\code{Rust} \overset{parse}{\longrightarrow} \code{AST} \overset{simplify}{\longrightarrow} \code{HIR} \overset{lower}{\longrightarrow} \code{MIR} \overset{executed\ by}{\longrightarrow} \code{miri}$$
+    The unification algorithm for constant expressions can be implemented in
+    \begin{itemize}
+        \item HIR or AST: Some constants could be in external libraries.
+        \item MIR: Side effects would make unification too complex. 
+        \item miri: A simple unification algorithm could be done.
+    \end{itemize}
+    We are still deciding which alternative is better.
 \end{frame}
 
 \begin{frame}[fragile]
-    \frametitle{Validation: Formal verification}
-    Proveer una prueba formal de que unificación y bounds son bien comportados 
-\end{frame}
-
-\begin{frame}[fragile]
-    \frametitle{Validation: Comparison against other languages}
-    Con estas nuevas features hasta donde puede dar Rust al compararlo con lenguajes como Idris
-\end{frame}
-
-\begin{frame}[fragile]
-    \frametitle{Validation: Integration with Rust}
-    Integrar este trabajo dentro de Rust como tal, RFCs y PRs al respecto
+    \frametitle{Validation}
+    We will
+    \begin{itemize}
+        \item Provide formal verification of the unification algorithm either by hand or using a proof assistant.
+        \item Compare the capabilities of Rust with this new set of features against other dependently typed languages.
+        \item Seek to integrate this work into Rust during 2019.
+    \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Schedule}
-    El cronograma... para (no) cumplirlo
 \end{frame}
