@@ -24,7 +24,7 @@
 
 \title{Bounded generics over constants in Rust}
 \author{Author: Christian Poveda \\ Advisor: Nicolás Cardozo}
-\institute{Systems and Computing Engineering Department \\ Universidad de los Andes \\ \includegraphics[width=3cm]{./flag.png}}
+\institute{Systems and Computing Engineering Department \\ Universidad de los Andes \\ \\ \includegraphics[width=6cm]{./flag.png} \hspace{90pt}\includegraphics[width=1.5cm]{./pil.png}}
 \date{2018-09-18}
 
 \begin{document}
@@ -215,6 +215,18 @@
 
 \begin{frame}[fragile]
     \frametitle{Related work: Languages with dependent types}
+    There are already languages with dependent types:
+    \begin{itemize}
+        \item Haskell: A general purpose pure functional programming language.
+            \begin{itemize}
+                \item It supports dependent types using extensions.
+                \item It has a liquid version.
+            \end{itemize}
+        \item Idris: A general purpose pure functional programming language with dependent types.
+        \item Coq: An interactive theorem prover written in OCaml.
+        \item Agda: An interactive theorem prover written in Haskell.
+    \end{itemize}
+    On 2018, there were around $15$ papers about those languages and dependent types in POPL, OOPSLA, PLDI and ICFP.
 \end{frame}
 
 \begin{frame}[fragile]
@@ -245,8 +257,8 @@
     The unification algorithm for constant expressions can be implemented in
     \begin{itemize}
         \item HIR or AST: Some constants could be in external libraries.
-        \item MIR: Side effects would make unification too complex. 
-        \item miri: A simple unification algorithm could be done,.
+        \item MIR: Control flow would make unification too complex. 
+        \item miri: A simple unification algorithm could be done.
     \end{itemize}
     We are still deciding which alternative is better.
 \end{frame}
