@@ -281,5 +281,60 @@
     \vspace{165pt}
 \end{frame}
 
-\end{document}
+\begin{frame}[fragile]
+    \frametitle{Otras operaciones sobre conjuntos: Diferencia}
+    Definimos la deferencia entre dos conjuntos $A$ y $B$ como 
+    $$ A \setminus B = A \cap B^{c}$$
+    Por ejemplo
+    $$ \{1, 2, 3\} \setminus \{1\} = \{2, 3\}$$
+    $$ \{1, 2, 3\} \setminus \varnothing = \{1, 2, 3\}$$
+    $$ \mathbb{Z} \setminus \mathbb{N} = \{-1, -2, -3, ...\}$$
+\end{frame}
 
+\begin{frame}[fragile]
+    \frametitle{Otras operaciones sobre conjuntos: Cardinal}
+    El cardinal de un conjunto representa su tamaño
+    $$ |A| = \text{Número de elementos de $A$}$$
+    Por ejemplo
+    $$ |\varnothing| = 0$$
+    $$ |\{5\}| = 1$$
+    $$ |\{4, 7\}| = 2$$
+    $$ |\{1, 2, 3\}| = 3$$
+    Sorprendentemente
+    $$ |\mathbb{N}| = |\mathbb{Z}| = |\mathbb{Q}|$$
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Otras operaciones sobre conjuntos: Conjunto potencia}
+    Si $A$ es un conjunto, el conjunto potencia de $A$ (tambien llamado partes de $A$) está compuesto por todos los posibles subconjuntos de $A$:
+ $$\mathcal{P}(A) = \{X \mid X \subseteq A\}$$
+    Por ejemplo
+    $$\mathcal{P}(\varnothing) = \{\varnothing\}$$
+    $$\mathcal{P}(\{1\}) = \{\varnothing, \{1\}\}$$
+    $$\mathcal{P}(\{1, 2\}) = \{\varnothing, \{1\}, \{2\}, \{1, 2\}\}$$
+    ¿Que cardinal debería tener $\mathcal{P}(\{1, 2, 3\})$? \\
+    ¿Cuánto debería ser |\mathcal{P}(A)| si |A| = n$?
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Otras operaciones sobre conjuntos: Producto cartesiano}
+    El producto cartesiano de $A$ y $B$ es el conjunto de parejas \textbf{ordenadas} con su primer elemento en $A$ y su segundo elemento en $B$
+    $$ A \times B = \{(a, b) \mid (a \in A) \land (b \in B)\}$$
+    Por ejemplo
+    $$ \{1, 2, 3\} \times \{5, 6\} = \{(1, 5), (1, 6), (2, 5), (2, 6), (3, 5), (3, 6)\}$
+    $$ \mathbb{N} \times \{-1, -2\} = \{(0, -1), (0, -2), (1, -1), (1, -2), ...\}$
+    Si $|A| = n$ y $|B| = m$, ¿cuánto es $|A \times B|$?
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Producto cartesiano: Una conexión interesante}
+    Sabemos que $Bool = \{True, False\}$.
+
+    ¿Qué conjunto es $Bool \times Bool$?
+
+    ¿Qué conjunto es $Bool \times Bool \times Bool$?
+
+    ¿Qué conjunto es $Bool \times Bool \times Bool \times ...$?
+\end{frame}
+
+\end{document}
