@@ -10,6 +10,7 @@
 \usepackage{fontspec}
 
 \usepackage{xcolor}
+\usepackage{graphicx}
 
 \usemintedstyle{friendly}
 \setmonofont{Source Code Pro}
@@ -77,19 +78,60 @@
 \end{frame}
 
 \begin{frame}[fragile]
-    \frametitle{Tipos de relaciones}
-    Si $R \in A \leftrightarrow B$:
-    \begin{itemize}
-        \item $R$ es total si $(\exists b:B \mid : aRb)$
-        \item $R$ es sobreyectiva si $(\exists a:A \mid : aRb)$
-        \item $R$ es función parcial si $(\forall a:A \mid aRb_{1} \land aRb_{2}: b_1 = b_2)$
-        \item $R$ es inyectiva si $(\forall b:B \mid a_1Rb \land a_2Rb: a_1 = a_2)$
-        \item $R$ es funcion total si es función parcial y es total.
-        \item $R$ es biyectiva si es inyectiva y sobreyectiva.
-    \end{itemize}
+    \frametitle{Tipos de relaciones: Total}
+    Decimos que $R \in A \leftrightarrow B$ es total si
+    $$(\forall a:A \mid : (\exists b:B \mid : aRb))$$
+    Equivalentemente, podemos decir que $R$ es total si 
+    $$\text{dom}(R) = A$$
     \begin{center}
-        ¿Qué tipo de relaciones son nuestros ejemplos?
+        \includegraphics[width=0.5\linewidth]{images/total.pdf}
     \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Tipos de relaciones: Sobreyectiva}
+    Decimos que $R \in A \leftrightarrow B$ es sobreyectiva si
+    $$(\forall b:B \mid : (\exists a:A \mid : aRb))$$
+    Equivalentemente, podemos decir que $R$ es sobreyectiva si 
+    $$\text{ran}(R) = B$$
+    \begin{center}
+        \includegraphics[width=0.5\linewidth]{images/surjective.pdf}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Tipos de relaciones: Función}
+    Decimos que $R \in A \leftrightarrow B$ es función si
+    $$(\forall a:A \mid aRb_{1} \land aRb_{2}: b_1 = b_2)$$
+    Equivalentemente, podemos decir que  
+    \begin{center}
+        $R$ es función $\equiv$ $R^T$ es inyectiva
+    \end{center}
+    \begin{center}
+        \includegraphics[width=0.5\linewidth]{images/function.pdf}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Tipos de relaciones: Inyectiva}
+    Decimos que $R \in A \leftrightarrow B$ es inyectiva si
+    $$(\forall b:B \mid a_{1}Rb \land a_{2}Rb: a_1 = a_2)$$
+    Equivalentemente, podemos decir que  
+    \begin{center}
+        $R$ es inyectiva $\equiv$ $R^T$ es función
+    \end{center}
+    \begin{center}
+        \includegraphics[width=0.5\linewidth]{images/injective.pdf}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Tipos de relaciones: Función total y Biyección}
+    \begin{itemize}
+        \item Decimos que $R \in A \leftrightarrow B$ es función total si es función y es total
+        \item Decimos que $R \in A \leftrightarrow B$ es biyectiva si es función, inyectiva y sobreyectiva.
+        \item $R$ es biyectiva $\equiv$ $R^T$ es biyectiva
+    \end{itemize}
 \end{frame}
 
 \end{document}
