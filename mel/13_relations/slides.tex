@@ -134,4 +134,102 @@
     \end{itemize}
 \end{frame}
 
+\begin{frame}[fragile]
+    \frametitle{Composición de relaciones: Definición}
+    Si tenemos $R \in A \leftrightarrow B$ y $S \in B \leftrightarrow C$ podemos \textbf{componerlas} para obtener una nueva relación
+    $$a (R \circ S) c \equiv (\exists b: B \mid : aRb \land bSc)$$
+    \begin{center}
+        \includegraphics[width=0.7\linewidth]{images/composition.pdf}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Composición de relaciones: Asociatividad} 
+    Si $R \in A \leftrightarrow B$, $S \in B \leftrightarrow C$ y $T \in C \leftrightarrow D$, entonces
+    $$R \circ (S \circ T) = (R \circ S) \circ T$$
+    \textbf{Demostración:} \\
+    Queremos ver que si $a \in A$, $d \in D$
+    $$a (R \circ (S \circ T)) d \equiv a ((R \circ S) \circ T) d$$
+    Por definición de $\circ$
+    $$a (R \circ (S \circ T)) d \equiv (\exists b: B \mid : a R b \land b (S \circ T) d)$$
+    Por definición de $\circ$
+    $$(\exists b: B \mid : a R b \land b (S \circ T) d) \equiv (\exists b: B \mid : a R b \land (\exists c: C \mid : bSc \land cTd))$$
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Composición de relaciones: Asociatividad} 
+    Por anidamiento
+    $$(\exists b \mid : a R b \land (\exists c \mid : bSc \land cTd)) \equiv (\exists b, c \mid : a R b \land bSc \land cTd)$$
+    Por anidamiento
+    $$(\exists b, c \mid : a R b \land bSc \land cTd) \equiv (\exists c \mid : (\exists b \mid : aRb \land bSc) \land cTd)$$
+    Por definición de $\circ$
+    $$(\exists c \mid : (\exists b \mid : aRb \land bSc) \land cTd) \equiv (\exists c \mid : a(R \circ S)c \land cTd)$$
+    Por definición de $\circ$
+    $$(\exists c \mid : a(R \circ S)c \land cTd) \equiv a((R \circ S) \circ T)d$$
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Composición de relaciones: Distribución} 
+    Si $R \in A \leftrightarrow B$, $S \in B \leftrightarrow C$ y $T \in B \leftrightarrow C$, entonces
+    $$ R \circ (S \cup T) = (R \circ S) \cup (R \circ T)$$
+    \textbf{Demostración:} Para ustedes
+    \vspace{165pt}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Relaciones dentro de un mismo conjunto}
+    Si $R \in A \leftrightarrow A$ decimos que:
+    \begin{itemize}
+        \item $R$ es reflexiva si $(\forall a:A \mid : aRa)$
+        \item $R$ es irreflexiva si $(\forall a:A \mid : \lnot aRa)$
+        \item $R$ es simétrica si $(\forall a, b:A \mid aRb : bRa)$
+        \item $R$ es asimétrica si $(\forall a, b:A \mid aRb : \lnot bRa)$
+        \item $R$ es antisimetrica si $(\forall a, b:A \mid aRb \land bRa : a = b)$
+        \item $R$ es transitiva si $(\forall a, b, c:A \mid aRb \land bRc: aRc)$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Definiciones alternativas}
+    Definimos la relación identidad $I \in A \leftrightarrow A$ como
+    $$I = \{(a, a) \mid a \in A\}$$
+    Si $R \in A \leftrightarrow A$ decimos que:
+    \begin{itemize}
+        \item $R$ es reflexiva si $I \subseteq R$
+        \item $R$ es irreflexiva si $I \cap R = \varnothing$
+        \item $R$ es simétrica si $R = R^T$
+        \item $R$ es asimetrica si $R \cap R^T = \varnothing$
+        \item $R$ es antisimétrica si $R \cap R^T \subseteq I$
+        \item $R$ es transitiva si $R \circ R \subset R$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Definiciones alternativas}
+    Demostremos que
+    $$(\forall a:A \mid : aRa) \equiv (I \subseteq R)$$
+    \textbf{Demostración:} \\
+    Por definición de $\subseteq$
+    $$(I \subseteq R) \equiv (\forall a, b \mid : (a,b) \in I \then (a,b) \in R)$$
+    Por notación de relación
+    $$(\forall a, b \mid : (a,b) \in I \then a,b \in R) \equiv (\forall a, b \mid : aIb \then aRb)$$
+    Por definición de identidad
+    $$(\forall a, b \mid : aIb \then aRb) \equiv (\forall a, b \mid : (a=b) \then aRb )$$
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Definiciones alternativas}
+    Por anidamiento
+    $$(\forall a, b \mid : (a=b) \then aRb ) \equiv (\forall a \mid : (\forall b \mid : ((a = b) \then aRb)))$$
+    Porque la igualdad es la igualdad
+    $$(\forall a \mid : (\forall b \mid : (a = b) \then aRb))\equiv (\forall a \mid : aRa)$$
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Definiciones alternativas}
+    Ahora ustedes demuestren que
+    $$(\forall a:A \mid : \lnot aRa) \equiv (I \cap R = \varnothing)$$
+    \vspace{160pt}
+\end{frame}
+
 \end{document}
