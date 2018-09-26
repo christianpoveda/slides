@@ -221,8 +221,10 @@
     \frametitle{Definiciones alternativas}
     Por anidamiento
     $$(\forall a, b \mid : (a=b) \then aRb ) \equiv (\forall a \mid : (\forall b \mid : ((a = b) \then aRb)))$$
-    Porque la igualdad es la igualdad
-    $$(\forall a \mid : (\forall b \mid : (a = b) \then aRb))\equiv (\forall a \mid : aRa)$$
+    Por trueque
+    $$(\forall a \mid : (\forall b \mid : (a = b) \then aRb)) \equiv (\forall a \mid : (\forall b \mid (a =  b) : aRb))$$
+    Por regla de un punto
+    $$(\forall a \mid : (\forall b \mid (a =  b) : aRb)) \equiv (\forall A \mid : aRa)$$
 \end{frame}
 
 \begin{frame}[fragile]
@@ -232,4 +234,51 @@
     \vspace{160pt}
 \end{frame}
 
+\begin{frame}[fragile]
+    \frametitle{Relaciones de equivalencia: Definición}
+    Sea $R \in A \leftrightarrow A$, decimos que $R$ es una \textbf{relación de equivalencia} si $R$ es reflexiva, simétrica y transitiva.\\
+    \textbf{Ejemplos:}
+    \begin{itemize}
+        \item $R : LL104 \leftrightarrow LL104$ definida como
+            $$aRb \equiv \text{los códigos de $a$ y $b$ terminan en el mismo número}$$
+        \item $S: \mathbb{Z} \leftrightarrow \mathbb{Z}$ definida como 
+            $$aSb \equiv (a - b)\text{ es multiplo de 3}$$ 
+        \item $T: \mathbb{Z} \leftrightarrow \mathbb{Z}$ definida como
+            $$aTb \equiv \text{$a$ y $b$ son primos}$$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Relaciones de equivalencia: Clases}
+    Sea $R \in A \leftrightarrow A$ una relación de equivalencia y $a \in A$.
+    Definimos la clase de equivalencia de $a$ como:
+    $$[a]_{R} = \{b \in A \mid aRb\}$$
+    En otras palabras, la clase de $a$ es el conjunto de todos los elementos que se relacionan con $a$.\\
+    \begin{center}
+        ¿Cuáles y cuántas son las clases de equivalencia de los ejemplos anteriores?
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Relaciones de orden parcial: Definición}
+    Sea $R \in A \leftrightarrow A$, decimos que $R$ es un \textbf{orden parcial} si es reflexiva, antisimétrica y transitiva.\\
+    \textbf{Ejemplos:}
+    \begin{itemize}
+        \item $\leq: \mathbb{Z} \leftrightarrow \mathbb{Z}$  
+        \item $\subseteq: \mathcal{U} \leftrightarrow \mathcal{U}$  
+        \item $R : LL104 \leftrightarrow LL104$ definida como
+            $$aRb \equiv \text{el último número del código de $a$ es $\leq$ que el de $b$}$$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Relaciones de orden estricto: Definición}
+    Sea $R \in A \leftrightarrow A$, decimos que $R$ es un \textbf{orden estricto} si es irreflexiva y transitiva.\\
+    \textbf{Ejemplos:}
+    \begin{itemize}
+        \item $<: \mathbb{Z} \leftrightarrow \mathbb{Z}$  
+        \item $R : LL104 \leftrightarrow LL104$ definida como
+            $$aRb \equiv \text{el último número del código de $a$ es menor que el de $b$}$$
+    \end{itemize}
+\end{frame}
 \end{document}
