@@ -28,7 +28,6 @@
 - Intereses:
     - Sistemas de tipos.
     - Modelos de concurrencia.
-    - Machine Learning.
 
 ### Calificaciones
 
@@ -38,9 +37,9 @@ Todas las notas se aproximan al múltiplo de 0.1 mas cercano sin excepción.
 
 ::: incremental
 - Examenes parciales:
-    - Lógica y sistemas formales: Septiembre 13 (30%)
-    - Teoría de conjuntos: Octubre 18 (30%)
-    - Teoría de números: Noviembre 22 (30%)
+    - Lógica y sistemas formales: Septiembre 12 (30%)
+    - Teoría de conjuntos: Octubre 17 (30%)
+    - Teoría de números: Noviembre 21 (30%)
 - Laboratorio (técnicamente 0%)
 - Quices y otras actividades (10%)
 :::
